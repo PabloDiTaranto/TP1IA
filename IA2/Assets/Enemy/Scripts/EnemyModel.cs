@@ -13,9 +13,11 @@ public class EnemyModel : MonoBehaviour
 
     private void Awake()
     {
-        var player = FindObjectOfType<PlayerModel>();
+        var player = FindObjectOfType<CharacterModel>();
         target = player.transform;
         rbPlayer = player._rb;
         playerDir = player._myDir;
     }
+
+    
 }

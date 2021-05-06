@@ -22,4 +22,15 @@ public class CharacterModel : MonoBehaviour
 
     public Camera _playerCam;
 
+    public Rigidbody _rb;
+
+    public Vector3 _myDir;
+
+    private float _currentLife, _maxLife = 100f;
+
+    public float CurrentLife { get { return _currentLife; } }
+    public float MaxLife { get { return _maxLife; } }
+
+    public Transform _spawnPosition;
+   
 }

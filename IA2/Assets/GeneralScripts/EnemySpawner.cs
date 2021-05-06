@@ -6,6 +6,7 @@ public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private Transform[] spawnsTransforms;
     [SerializeField] private Transform playerTransform;
+    [SerializeField] private Transform _grid;
     [SerializeField] private GameObject enemyPrefab;
     [SerializeField] private int maxEnemies;
     [SerializeField] private float timeBetweenSpawns;
@@ -44,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
             dic.Add(spawn, (int)Vector3.Distance(spawn.position, playerTransform.position));
         }
         var spawnPos = rouletteSpawn.Run(dic);
-        Instantiate(enemyPrefab, spawnPos.position, Quaternion.identity);
+        Instantiate(enemyPrefab, spawnPos.position, Quaternion.identity, _grid);
         enemiesOnScene++;
     }
 

@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour,IGridEntity
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private EnemyModel enemy;
@@ -20,6 +21,8 @@ public class EnemyController : MonoBehaviour
     private Roulette roulette;
 
     private bool isPlayerAlive = true;
+
+    public event Action<IGridEntity> OnMove;
 
     private void Awake()
     {        
@@ -77,7 +80,8 @@ public class EnemyController : MonoBehaviour
 
     private void Update()
     {
-        if(isPlayerAlive)
+        OnMove?.Invoke(this);
+        if (isPlayerAlive)
             fsmEnemy.OnUpdate();        
     }
 
@@ -145,5 +149,11 @@ public class EnemyController : MonoBehaviour
         {
             currentLife--;
         }
+    }
+
+    public Vector3 Position
+    {
+        get => transform.position;
+        set => transform.position = value;
     }
 }

@@ -12,7 +12,7 @@ public class AgentPathfinding : MonoBehaviour
 
     public List<Vector3> PathFindingAstarVector(Transform init)
     {
-        _target = FindObjectOfType<PlayerModel>().transform;
+        _target = FindObjectOfType<CharacterModel>().transform;
         Vector3 posInit = init.transform.position;
         var path = _aStarVector.Run(posInit, SatisfiesVector, GetNeighbours, GetCost, HeuristicVector, 1000);
         _listVector = PathCleaner(path);
