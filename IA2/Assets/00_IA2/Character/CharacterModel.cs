@@ -26,7 +26,7 @@ public class CharacterModel : MonoBehaviour
 
     public Vector3 _myDir;
 
-    private float _currentLife, _maxLife = 100f;
+    private float _currentLife, _maxLife = 50f;
 
     public float CurrentLife { get { return _currentLife; } }
     public float MaxLife { get { return _maxLife; } }

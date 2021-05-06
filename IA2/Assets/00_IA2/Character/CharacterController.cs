@@ -106,7 +106,6 @@ public class CharacterController : MonoBehaviour//NO PUEDE USAR LA INTERFAZ IGRI
 
     void Dead()
     {
-        
         lerpTimer += Time.deltaTime;
         transform.rotation = Quaternion.Euler(transform.rotation.x, transform.rotation.y, 
             Mathf.Lerp(Quaternion.identity.z, 90, lerpTimer * 2));
