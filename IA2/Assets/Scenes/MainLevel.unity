@@ -5771,12 +5771,12 @@ GameObject:
   - component: {fileID: 654041665}
   - component: {fileID: 654041664}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: GRIDENTITYTESTER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &654041664
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18005,12 +18005,12 @@ GameObject:
   - component: {fileID: 2066258462}
   - component: {fileID: 2066258461}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: QUERYTESTER
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2066258461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18679,9 +18679,9 @@ MonoBehaviour:
   _shootPoint: {fileID: 18648299}
   minimumY: -60
   maximumY: 60
-  sensitivityY: 15
+  sensitivityY: 3
   rotationY: 0
-  speedRot: 200
+  speedRot: 120
   _playerCam: {fileID: 259936944}
   _rb: {fileID: 2108196238}
   _myDir: {x: 0, y: 0, z: 0}
