@@ -25,6 +25,8 @@ public class EnemyController : MonoBehaviour,IGridEntity
     public event Action<IGridEntity> OnMove;
 
 
+
+
     private void Awake()
     {        
         currentLife = enemy.life;
@@ -87,9 +89,10 @@ public class EnemyController : MonoBehaviour,IGridEntity
         if (isPlayerAlive)
         {
             fsmEnemy.OnUpdate();
-            OnMove?.Invoke(this);
         }
+        OnMove?.Invoke(this);
     }
+
 
     void ToDead()
     {
@@ -150,10 +153,7 @@ public class EnemyController : MonoBehaviour,IGridEntity
         Destroy(gameObject);
     }
 
-    /*private void OnDestroy()
-    {
-        this.OnMove -= SpatialGrid._instance.UpdateEntity;
-    }*/
+
 
     private void OnTriggerEnter(Collider other)
     {

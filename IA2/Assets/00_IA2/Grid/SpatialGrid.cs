@@ -51,7 +51,7 @@ public class SpatialGrid : MonoBehaviour {
     private void Awake() {
 
         if (_instance != null)
-            _instance = null;
+            Destroy(this);
         else
             _instance = this;
 
