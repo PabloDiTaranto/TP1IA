@@ -12,13 +12,17 @@ public class GridEntityTester : MonoBehaviour, IGridEntity {
     private void Awake()
     {
         _renderer = GetComponent<Renderer>();
+        OnMove += SpatialGrid._instance.UpdateEntity;
+        SpatialGrid._instance.UpdateEntity(this);
     }
 
     void Update() {
         if (onGrid)
-            _renderer.material.color = Color.red;
+            Debug.Log("En Grilla");
+        //_renderer.material.color = Color.red;
         else
-            _renderer.material.color = Color.gray;
+            Debug.Log("NO");
+            //_renderer.material.color = Color.gray;
         
         transform.position += velocity * Time.deltaTime;
         OnMove?.Invoke(this);

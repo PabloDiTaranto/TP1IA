@@ -6,24 +6,37 @@ public class QueryTester : MonoBehaviour {
 
     private IQuery[]           _queries;
     private GridEntityTester[] _testers;
+    private EnemyController[] _enemies;
     public SquareQuery _square;
+    IGridEntity[] _example;
 
-    private void Awake() {
-        _queries = FindObjectsOfType<SquareQuery>();
-        _testers = FindObjectsOfType<GridEntityTester>();
+    IQuery charac;
+
+    private void Awake() 
+    {
+        charac = FindObjectOfType<CharacterController>().GetComponent<IQuery>();
     }
 
+
     private void LateUpdate() {
-        var highlighted = _queries.SelectMany(n => n.Query()).OfType<GridEntityTester>();
+        _queries = FindObjectsOfType<SquareQuery>();
+        _testers = FindObjectsOfType<GridEntityTester>();
+        var highlighted = _queries.SelectMany(n => charac.Query()).OfType<GridEntityTester>();
         var notHighlighted = _testers.Where(n => highlighted.All(x => n != x));
-        Debug.Log(_queries.Length);
-        Debug.Log(_testers.Length);
+
+        /*foreach (var item in _testers)
+        {
+            if (charac.Query().Contains(item))
+            {
+                Debug.Log(item+"WW");
+            }
+        }*/
 
 
         foreach (var tester in highlighted) 
         {
             tester.onGrid = true;
-            Debug.Log(tester + "ongrid");
+            Debug.Log(tester.name + "ongrid");
         }
 
         foreach (var tester in notHighlighted) 

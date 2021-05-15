@@ -45,8 +45,11 @@ public class EnemySpawner : MonoBehaviour
             dic.Add(spawn, (int)Vector3.Distance(spawn.position, playerTransform.position));
         }
         var spawnPos = rouletteSpawn.Run(dic);
-        Instantiate(enemyPrefab, spawnPos.position, Quaternion.identity, _grid);
+        var obj = Instantiate(enemyPrefab, spawnPos.position, Quaternion.identity, _grid).GetComponent<EnemyController>();
+        //obj.OnMove += SpatialGrid._instance.UpdateEntity;
+        //SpatialGrid._instance.UpdateEntity(obj);
         enemiesOnScene++;
+
     }
 
     private void SubstractEnemyOnScene(params object[] parameters)

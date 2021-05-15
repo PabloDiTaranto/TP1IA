@@ -12,6 +12,8 @@ public class CharacterController : MonoBehaviour//NO PUEDE USAR LA INTERFAZ IGRI
     public float CurrentLifePlayer { get { return _currentLife; } }
     bool _isDead;
     float lerpTimer;
+
+    int counter;
     void Awake()
     {
         _characterModel = GetComponent<CharacterModel>();
@@ -30,12 +32,26 @@ public class CharacterController : MonoBehaviour//NO PUEDE USAR LA INTERFAZ IGRI
 
     void Update()
     {
+        var query = GetComponent<SquareQuery>();
+        var test = query.Query();
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            foreach (var item in test)
+            {
+                Debug.Log(item);
+                counter++;
+            }
+        }
+
+
+        ////
+        if (PauseManager.isPause) return;
         if (_isDead)
         {
             Dead();
             return;
         }
-        Debug.Log(lerpTimer);
+        //Debug.Log(lerpTimer);
         var horizontal = Input.GetAxis("Horizontal");
         var vertical = Input.GetAxis("Vertical");
         var rotHorX = Input.GetAxis("Mouse X");

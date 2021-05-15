@@ -24,6 +24,7 @@ public class EnemyController : MonoBehaviour,IGridEntity
 
     public event Action<IGridEntity> OnMove;
 
+
     private void Awake()
     {        
         currentLife = enemy.life;
@@ -31,6 +32,9 @@ public class EnemyController : MonoBehaviour,IGridEntity
         seekBullet = new BulletSeek(enemy.target);
         pursuitBullet = new BulletPursuit(enemy.rbPlayer, enemy.timePredictionBullet, enemy.playerDir);
         EventManager.Subscribe("OnPlayerDead", DestroyMe);
+
+        OnMove += SpatialGrid._instance.UpdateEntity;
+        SpatialGrid._instance.UpdateEntity(this);
     }
 
     private void Start()
@@ -80,9 +84,11 @@ public class EnemyController : MonoBehaviour,IGridEntity
 
     private void Update()
     {
-        OnMove?.Invoke(this);
         if (isPlayerAlive)
-            fsmEnemy.OnUpdate();        
+        {
+            fsmEnemy.OnUpdate();
+            OnMove?.Invoke(this);
+        }
     }
 
     void ToDead()
@@ -139,9 +145,15 @@ public class EnemyController : MonoBehaviour,IGridEntity
 
     public void DestroyMe(params object[] parameters)
     {
+        isPlayerAlive = false;
         EventManager.Unsubscribe("OnPlayerDead", DestroyMe);
         Destroy(gameObject);
     }
+
+    /*private void OnDestroy()
+    {
+        this.OnMove -= SpatialGrid._instance.UpdateEntity;
+    }*/
 
     private void OnTriggerEnter(Collider other)
     {
