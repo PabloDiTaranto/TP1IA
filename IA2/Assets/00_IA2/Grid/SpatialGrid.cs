@@ -69,12 +69,14 @@ public class SpatialGrid : MonoBehaviour {
                   .Where(n => n != null);
 
         foreach (var e in ents) {
+            Debug.Log("dadsasd");
             e.OnMove += UpdateEntity;
             UpdateEntity(e);
         }
     }
 
     public void UpdateEntity(IGridEntity entity) {
+        if (entity == null) return;
         var lastPos    = lastPositions.ContainsKey(entity) ? lastPositions[entity] : Outside;
         var currentPos = GetPositionInGrid(entity.Position);
 
@@ -204,7 +206,7 @@ public class SpatialGrid : MonoBehaviour {
             int connections = 0;
             foreach (var entity in allElems) {
                 foreach (var neighbour in allElems.Where(x => x != entity)) {
-                    Gizmos.DrawLine(entity.Position, neighbour.Position);
+                    //Gizmos.DrawLine(entity.Position, neighbour.Position);
                     connections++;
                 }
 

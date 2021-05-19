@@ -25,7 +25,7 @@ public class EnemyController : MonoBehaviour,IGridEntity
     public event Action<IGridEntity> OnMove;
 
 
-
+    public bool _isDead = false;
 
     private void Awake()
     {        
@@ -133,7 +133,6 @@ public class EnemyController : MonoBehaviour,IGridEntity
             return false;
         }
     }
-
     public bool HasLife()
     {
         return (currentLife > 0);
@@ -152,14 +151,19 @@ public class EnemyController : MonoBehaviour,IGridEntity
         EventManager.Unsubscribe("OnPlayerDead", DestroyMe);
         Destroy(gameObject);
     }
-
-
+    public void Damage()
+    {
+        _isDead = true;
+        currentLife--;
+         //OnMove -= SpatialGrid._instance.UpdateEntity;
+    }
+   
 
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == 14)
         {
-            currentLife--;
+            Damage();
         }
     }
 

@@ -12,6 +12,7 @@ public class CharacterController : MonoBehaviour//NO PUEDE USAR LA INTERFAZ IGRI
     public float CurrentLifePlayer { get { return _currentLife; } }
     bool _isDead;
     float lerpTimer;
+    public SpecialAttack _specialAttack;
 
     int counter;
     void Awake()
@@ -19,6 +20,7 @@ public class CharacterController : MonoBehaviour//NO PUEDE USAR LA INTERFAZ IGRI
         _characterModel = GetComponent<CharacterModel>();
         _characterModel._rb = GetComponent<Rigidbody>();
         _characterModel._playerCam = GetComponentInChildren<Camera>();
+        _specialAttack = GetComponent<SpecialAttack>();
     }
 
     private void Start()
@@ -65,7 +67,12 @@ public class CharacterController : MonoBehaviour//NO PUEDE USAR LA INTERFAZ IGRI
         {
             StartCoroutine("Timer");
         }
-        
+
+        if (Input.GetKeyDown(KeyCode.Mouse1))
+        {
+            _specialAttack.Attack();
+        }
+
     }
 
     void Move(float horizontal, float vertical)
