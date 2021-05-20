@@ -21,6 +21,7 @@ public class CharacterController : MonoBehaviour//NO PUEDE USAR LA INTERFAZ IGRI
         _characterModel._rb = GetComponent<Rigidbody>();
         _characterModel._playerCam = GetComponentInChildren<Camera>();
         _specialAttack = GetComponent<SpecialAttack>();
+        _characterModel._playerName = PlayerNameManager._name;
     }
 
     private void Start()

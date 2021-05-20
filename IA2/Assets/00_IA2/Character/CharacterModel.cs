@@ -32,5 +32,10 @@ public class CharacterModel : MonoBehaviour
     public float MaxLife { get { return _maxLife; } }
 
     public Transform _spawnPosition;
+
+    public int _newScore;
+
+
+    public string _playerName;
    
 }

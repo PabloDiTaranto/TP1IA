@@ -1,12 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class MenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject[] menuItems;
     [SerializeField] private GameObject[] creditsItems;
-    
+    [SerializeField] private TMP_InputField _inputField;
+
+
     public void CreditButton()
     {
         foreach (var item in menuItems)
@@ -33,6 +37,10 @@ public class MenuManager : MonoBehaviour
 
     public void PlayButton()
     {
+        if (_inputField.text == "")
+            _inputField.text = "Guest";
+
+        PlayerNameManager._name = _inputField.text;
         MySceneManager.ChangeScene("SelectTime");
     }
 

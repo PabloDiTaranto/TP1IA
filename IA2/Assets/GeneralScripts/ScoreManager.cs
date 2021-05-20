@@ -13,6 +13,8 @@ public class ScoreManager : MonoBehaviour
         EventManager.Subscribe("OnEnemyDestroy", AddPointsPlayer);
         EventManager.Subscribe("OnPlayerDead", AddPointsEnemies);
     }
+
+
     
     private void AddPointsPlayer(params object[] parameters)
     {

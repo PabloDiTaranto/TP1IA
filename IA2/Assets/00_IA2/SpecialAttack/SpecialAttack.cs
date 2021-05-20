@@ -50,11 +50,11 @@ public class SpecialAttack : MonoBehaviour
         var result = _query.Query()
             .OfType<EnemyController>()
             .OrderBy(n => (_character.transform.position - n.transform.position).sqrMagnitude)
-            //.Where(n => n.gameObject != null)
+            .Where(n => !n._isDead&&n.isActiveAndEnabled)
             .Take(3);
 
 
-        if (result == null) return;
+        //if (result == null) return;
 
         RaycastHit hit;
         foreach (var item in result)
