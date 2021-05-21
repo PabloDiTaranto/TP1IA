@@ -37,7 +37,6 @@ public class PopUpCanvas : MonoBehaviour
             audioSource.loop = false;
             audioSource.Play();
             resultText.text = "You Win :D";
-           // _popUpPanel.SetActive(true);
             UIFinishedButtons(false,true);
         }
         else
@@ -48,7 +47,6 @@ public class PopUpCanvas : MonoBehaviour
             audioSource.loop = false;
             audioSource.Play();
             resultText.text = "You Lose :C";
-            //_popUpPanel.SetActive(true);
             UIFinishedButtons(true,false);
         }            
     }
@@ -81,6 +79,7 @@ public class PopUpCanvas : MonoBehaviour
     {
         var player = FindObjectOfType<CharacterModel>();
         var playersLenght = 6;
+        player._newScore = ScoreManager.GetPoints()[0];
         var getText = _rankingResults.CheckValues(player, playersLenght);
         foreach (var item in getText)
         {

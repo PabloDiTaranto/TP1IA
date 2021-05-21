@@ -47,8 +47,8 @@ public class MedKit : MonoBehaviour
     {
         if(other.gameObject.layer == 8)
         {
-            var player = other.GetComponent<CharacterController>();
-            if(player.CurrentLifePlayer < player._characterModel.MaxLife)
+            var player = other.GetComponent<CharacterModel>();
+            if(player.CurrentLife < player.MaxLife)
             {
                 MedkitUsed();
             }

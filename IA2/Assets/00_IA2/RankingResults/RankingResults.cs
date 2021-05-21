@@ -6,11 +6,8 @@ using System;
 
 public class RankingResults : MonoBehaviour
 {
-    public CharacterModel[] _players;
-
-    public string[] _rankings;
-    public string[] _names;
-    public int[] _scores;
+    private static CharacterModel[] _players;
+    private string[] _rankings;
 
     void Awake()
     {
@@ -21,30 +18,20 @@ public class RankingResults : MonoBehaviour
         }
 
         _players[0]._playerName = "KennethGod";
-        _players[1]._playerName = "Pablo";
-        _players[2]._playerName = "Andrea";
-        _players[3]._playerName = "Cami";
-        _players[4]._playerName = "IA2";
+        _players[1]._playerName = "Paco";
+        _players[2]._playerName = "Pepe";
+        _players[3]._playerName = "Juan";
+        _players[4]._playerName = "Carla";
 
         _players[0]._newScore = 10000;
-        _players[1]._newScore = 21;
-        _players[2]._newScore = 25;
-        _players[3]._newScore = 20;
-        _players[4]._newScore = 9999;
+        _players[1]._newScore = 26;
+        _players[2]._newScore = 15;
+        _players[3]._newScore = 38;
+        _players[4]._newScore = 33;
     }
 
-    private void Start()
-    {
-        //EventManager.Subscribe("OnChangedRanking", RankingValues);
-    }
 
-    void RankingValues(params object[] parameters)
-    {
-        var player = (CharacterModel)parameters[0];
-        var playersLenght = (int)parameters[1];
-        CheckValues(player, playersLenght);
-    }
-
+    //IA2-P3
     public string[] CheckValues(CharacterModel currentPlayer, int rankingLenght)
     {
         if (currentPlayer._newScore < _players[rankingLenght - 1]._newScore)

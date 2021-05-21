@@ -4,38 +4,64 @@ using UnityEngine;
 
 public class CharacterModel : MonoBehaviour
 {
+    #region Speed Values
     [SerializeField]
-    float _speed;
+    private float _speed;
     public float Speed { get { return _speed; } }
+    #endregion
 
+    #region Bullet Values
     [SerializeField]
-    GameObject _bullet;
-
+    private GameObject _bullet;
     public GameObject Bullet { get { return _bullet; } }
 
+    public Transform _spawnPosition;
+    #endregion
 
+    #region Shoot Point
     [SerializeField]
-    Transform _shootPoint;
+    private Transform _shootPoint;
     public Transform ShootPoint { get { return _shootPoint; } }
+    #endregion
 
-    public float  minimumY = -60f, maximumY = 60f, sensitivityY = 15f, rotationY, speedRot;
+    #region Rigidbody
+    [HideInInspector]
+    public Rigidbody _rb;
+    #endregion
+
+    #region Direction
+    [HideInInspector]
+    public Vector3 _myDir;
+    #endregion
+
+    #region Camera Values
+
+    [HideInInspector]
+    public float _rotationY;
+
+    public float _speedRot;
+
+    private float _minimumY = -60f, _maximumY = 60f, _sensitivityY = 3f;
+    public float MinimumY { get { return _minimumY; } }
+    public float MaximumY { get { return _maximumY; } }
+    public float SensitivityY { get { return _sensitivityY; } }
 
     public Camera _playerCam;
+    #endregion
 
-    public Rigidbody _rb;
-
-    public Vector3 _myDir;
+    #region Life Values
 
     private float _currentLife, _maxLife = 50f;
-
-    public float CurrentLife { get { return _currentLife; } }
+    public float CurrentLife { get { return _currentLife; } set { _currentLife = value; } }
     public float MaxLife { get { return _maxLife; } }
 
-    public Transform _spawnPosition;
+    #endregion
 
+    #region Ranking Values
     public int _newScore;
 
-
     public string _playerName;
-   
+    #endregion
+
+
 }

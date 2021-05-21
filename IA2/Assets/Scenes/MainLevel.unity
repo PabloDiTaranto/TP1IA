@@ -6074,7 +6074,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &641819997
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7850,7 +7850,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &871070720
 RectTransform:
   m_ObjectHideFlags: 0
@@ -14120,16 +14120,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd5f042223066f40ac39ac25ddb4ff8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _players:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  _rankings: []
-  _names: []
-  _scores: 
 --- !u!4 &1565154378
 Transform:
   m_ObjectHideFlags: 0
@@ -18090,7 +18080,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1918784749
 RectTransform:
   m_ObjectHideFlags: 0
@@ -19573,17 +19563,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _bullet: {fileID: 8821135667369095012, guid: 543e605595ac62e49b6d9fceb973144c, type: 3}
+  _spawnPosition: {fileID: 1001466069}
   _shootPoint: {fileID: 18648299}
-  minimumY: -60
-  maximumY: 60
-  sensitivityY: 3
-  rotationY: 0
-  speedRot: 120
-  _playerCam: {fileID: 259936944}
   _rb: {fileID: 2108196238}
   _myDir: {x: 0, y: 0, z: 0}
-  _spawnPosition: {fileID: 1001466069}
-  _newScore: 20000
+  _rotationY: 0
+  _speedRot: 120
+  _playerCam: {fileID: 259936944}
+  _newScore: 0
   _playerName: 
 --- !u!114 &2108196232
 MonoBehaviour:
@@ -19597,8 +19584,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c03f55f767c52b643acb96ac86ac724c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterModel: {fileID: 0}
-  _specialAttack: {fileID: 0}
 --- !u!114 &2108196233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20005,7 +19990,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb41acb6c083294b812a6bf18b22cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _layerMask: 0
 --- !u!4 &2109009679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7089823039546908690, guid: 34f13f42aa37fe042ab6574480847195,

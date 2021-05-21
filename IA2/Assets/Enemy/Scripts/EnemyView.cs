@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿
+//IA2-P1
+//(Este enemigo fue desarrollado durante la cursada de IA1)
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

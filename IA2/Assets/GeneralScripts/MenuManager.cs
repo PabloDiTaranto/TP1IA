@@ -10,7 +10,6 @@ public class MenuManager : MonoBehaviour
     [SerializeField] private GameObject[] creditsItems;
     [SerializeField] private TMP_InputField _inputField;
 
-
     public void CreditButton()
     {
         foreach (var item in menuItems)

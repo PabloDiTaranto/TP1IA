@@ -1,15 +1,19 @@
-﻿using System;
+﻿
+//IA2-P1
+//(Este enemigo fue desarrollado durante la cursada de IA1)
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyController : MonoBehaviour,IGridEntity
+public class EnemyController : AbstractEnemy,IGridEntity
 {
     [SerializeField] private Rigidbody rb;
     [SerializeField] private EnemyModel enemy;
     [SerializeField] private EnemyView enemyView;
     [SerializeField] private AgentPathfinding _agentPF;
-    private float currentLife, timerRespawn;
+    private float timerRespawn;
     [SerializeField] private LineOfSight lineOfSight;
     private FSM<string> fsmEnemy;
 
@@ -24,12 +28,9 @@ public class EnemyController : MonoBehaviour,IGridEntity
 
     public event Action<IGridEntity> OnMove;
 
-
-    public bool _isDead = false;
-
     private void Awake()
-    {        
-        currentLife = enemy.life;
+    {
+        _currentLife = 1;
         pursuitObsAvoidance = new PursuitObstacleAvoidance(enemy.rbPlayer, enemy.radius, enemy.avoidWeight, enemy.maskAvoidance, enemy.timePredictionChase);
         seekBullet = new BulletSeek(enemy.target);
         pursuitBullet = new BulletPursuit(enemy.rbPlayer, enemy.timePredictionBullet, enemy.playerDir);
@@ -93,7 +94,6 @@ public class EnemyController : MonoBehaviour,IGridEntity
         OnMove?.Invoke(this);
     }
 
-
     void ToDead()
     {
         fsmEnemy.Transition("Dead");
@@ -135,7 +135,7 @@ public class EnemyController : MonoBehaviour,IGridEntity
     }
     public bool HasLife()
     {
-        return (currentLife > 0);
+        return (_currentLife > 0);
     }
     public bool CheckDistanceToFire()
     {
@@ -151,13 +151,12 @@ public class EnemyController : MonoBehaviour,IGridEntity
         EventManager.Unsubscribe("OnPlayerDead", DestroyMe);
         Destroy(gameObject);
     }
-    public void Damage()
+    
+    public override void Damage()
     {
         _isDead = true;
-        currentLife--;
-         //OnMove -= SpatialGrid._instance.UpdateEntity;
+        _currentLife--;
     }
-   
 
     private void OnTriggerEnter(Collider other)
     {
