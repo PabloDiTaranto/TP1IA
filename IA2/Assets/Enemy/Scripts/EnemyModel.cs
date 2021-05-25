@@ -22,6 +22,4 @@ public class EnemyModel : MonoBehaviour
         rbPlayer = player._rb;
         playerDir = player._myDir;
     }
-
-    
 }

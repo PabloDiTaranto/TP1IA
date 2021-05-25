@@ -98,6 +98,14 @@ public class SpatialGrid : MonoBehaviour {
             lastPositions.Remove(entity);
     }
 
+    public void Remove(IGridEntity entity)
+    {
+        entity.OnMove -= UpdateEntity;
+        var currentPos = GetPositionInGrid(entity.Position);
+        buckets[currentPos.Item1, currentPos.Item2].Remove(entity);
+        lastPositions.Remove(entity);
+    }
+
     public IEnumerable<IGridEntity> Query(Vector3 aabbFrom, Vector3 aabbTo, Func<Vector3, bool> filterByPosition) {
         var from = new Vector3(Mathf.Min(aabbFrom.x, aabbTo.x), 0, Mathf.Min(aabbFrom.z, aabbTo.z));
         var to   = new Vector3(Mathf.Max(aabbFrom.x, aabbTo.x), 0, Mathf.Max(aabbFrom.z, aabbTo.z));

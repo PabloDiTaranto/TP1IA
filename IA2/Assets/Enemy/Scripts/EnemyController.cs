@@ -158,6 +158,11 @@ public class EnemyController : AbstractEnemy,IGridEntity
         _currentLife--;
     }
 
+    private void OnDestroy()
+    {
+        SpatialGrid._instance.Remove(this);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.layer == 14)

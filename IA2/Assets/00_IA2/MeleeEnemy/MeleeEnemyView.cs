@@ -4,24 +4,39 @@ using UnityEngine;
 
 public class MeleeEnemyView : MonoBehaviour
 {
-    [SerializeField]
-    private Animator _animator;
-    void Awake()
+    [SerializeField] private Animator _animator;
+    [SerializeField] private AudioSource _audioSource;
+    [SerializeField] private AudioClip[] _clips;
+    private void Awake()
     {
         _animator = GetComponent<Animator>();
     }
 
-    void Update()
+    private void Update()
     {
-        
+        if (PauseManager.isPause)
+        {
+            if (_audioSource.isPlaying)
+                _audioSource.Pause();
+        }
+        else
+        {
+            if(!_audioSource.isPlaying)
+            _audioSource.UnPause();
+        }
+    }
+    public void OneShotSoundClip(int indexClip)
+    {
+        _audioSource.PlayOneShot(_clips[indexClip]);
     }
 
-    void AttackAnim(bool value)
+    public void AttackAnim(bool value)
     {
         _animator.SetBool("isAttacking", value);
     }
 
-    void DeathAnim()
+
+    public void DeathAnim()
     {
         _animator.SetTrigger("isDeath");
     }

@@ -24,7 +24,7 @@ public class SpecialAttack : MonoBehaviour
         var result = _query.Query()
             .OfType<AbstractEnemy>()
             .OrderBy(n => (_character.transform.position - n.transform.position).sqrMagnitude)
-            .Where(n => !n._isDead&&n.isActiveAndEnabled)
+            .Where(n => !n._isDead)
             .Take(3);
 
         RaycastHit hit;

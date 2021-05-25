@@ -171,6 +171,8 @@ GameObject:
   - component: {fileID: 5437738635877551360}
   - component: {fileID: 5437738635877551361}
   - component: {fileID: 5190241500591481146}
+  - component: {fileID: 2160638282542416279}
+  - component: {fileID: 8224270253120950042}
   m_Layer: 0
   m_Name: MeleeEnemyOnion
   m_TagString: Untagged
@@ -259,6 +261,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isDead: 0
+  _lineOfSight: {fileID: 0}
+  _secondEnemyModel: {fileID: 0}
+  _secondEnemyView: {fileID: 0}
+  _agentPathfinding: {fileID: 0}
 --- !u!114 &5437738635877551361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,6 +277,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: acedee15099fc604e8a316765c3b70ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maskAvoidance:
+    serializedVersion: 2
+    m_Bits: 0
+  _rb: {fileID: 0}
+  _target: {fileID: 0}
+  _radius: 0
+  _avoidWeight: 0
+  _distanceToAttack: 0
+  _speed: 0
+  _speedRot: 0
+  _timeToCheckPlayerPos: 0
+  _timeToRespawn: 0
+  _timePredictionChase: 0
+  _attackRate: 0
+  _attackTrigger: {fileID: 0}
 --- !u!114 &5190241500591481146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -284,6 +305,38 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _animator: {fileID: 0}
+  _audioSource: {fileID: 0}
+  _clips: []
+--- !u!65 &2160638282542416279
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5437738635877551363}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.05978255, y: 0.06669608, z: 0.035385557}
+  m_Center: {x: -0.02286478, y: 0.004860281, z: 0.026713135}
+--- !u!114 &8224270253120950042
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5437738635877551363}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90e5a2b05044b644c84189315d7895b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 15
+  angle: 90
+  maskLoS:
+    serializedVersion: 2
+    m_Bits: 256
 --- !u!1 &5953734864223558500
 GameObject:
   m_ObjectHideFlags: 0
