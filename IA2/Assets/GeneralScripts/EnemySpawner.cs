@@ -46,9 +46,9 @@ public class EnemySpawner : MonoBehaviour
         }
         var spawnPos = rouletteSpawn.Run(dic);
 
-        var randomIndexEnemy = Random.Range(0, 1);
+        var randomIndexEnemy = Random.Range(0, 2);
 
-        Instantiate(_enemyPrefab[1], spawnPos.position, Quaternion.identity, _grid);
+        Instantiate(_enemyPrefab[randomIndexEnemy], spawnPos.position, Quaternion.identity, _grid);
         enemiesOnScene++;
 
     }

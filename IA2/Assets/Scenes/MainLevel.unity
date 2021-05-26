@@ -19991,6 +19991,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cb41acb6c083294b812a6bf18b22cfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackParticle: {fileID: 4086739749118027545, guid: bbd56922fc3fa5247a61d118b13a237e,
+    type: 3}
 --- !u!4 &2109009679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7089823039546908690, guid: 34f13f42aa37fe042ab6574480847195,

@@ -7,13 +7,12 @@ public class SpecialAttack : MonoBehaviour
 {
     private CharacterController _character;
     private SquareQuery _query;
-    //int _layerMask;
+    [SerializeField] ParticleSystem _attackParticle;
 
     void Start()
     {
         _character = FindObjectOfType<CharacterController>();
         _query = FindObjectOfType<SquareQuery>();
-        //_layerMask = 1 << LayerMask.NameToLayer("Enemy");
     }
 
     public void Attack()
@@ -31,9 +30,6 @@ public class SpecialAttack : MonoBehaviour
         foreach (var item in result)
         {
             Debug.Log(item);
-            //if (!item.isActiveAndEnabled) continue;
-            //if (item!=null) continue;
-            //if (item.Equals(null)) continue;
 
             var twoDimensionPlayer = new Vector3(_character.transform.position.x, 0.5f, _character.transform.position.z);
             var twoDimensionEnemy = new Vector3(item.transform.position.x, 0.5f, item.transform.position.z);
@@ -42,6 +38,7 @@ public class SpecialAttack : MonoBehaviour
             {
                 if (hit.collider.gameObject == item.gameObject)
                 {
+                    Instantiate(_attackParticle, item.transform.position, Quaternion.Euler(-90,0,0));
                     Debug.DrawRay(transform.position, dir
                         * hit.distance, Color.magenta);
                     print(hit.transform);

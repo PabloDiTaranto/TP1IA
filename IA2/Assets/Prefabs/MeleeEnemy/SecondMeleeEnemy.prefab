@@ -231,6 +231,50 @@ Transform:
   m_Father: {fileID: 6382333196377186059}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1278138472130604069
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1823068403352629383}
+  - component: {fileID: 4135619688878997881}
+  m_Layer: 12
+  m_Name: Trigger
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1823068403352629383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278138472130604069}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 6382333196377186059}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &4135619688878997881
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1278138472130604069}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Size: {x: 0.06428019, y: 0.03979544, z: 0.060112182}
+  m_Center: {x: -0.001256885, y: 0.0183106, z: 0.042852834}
 --- !u!1 &1484581150989338301
 GameObject:
   m_ObjectHideFlags: 0
@@ -1241,7 +1285,6 @@ GameObject:
   - component: {fileID: 7983127193404845348}
   - component: {fileID: 7983127193404845351}
   - component: {fileID: 7983127193404845350}
-  - component: {fileID: 7983127193404845337}
   m_Layer: 0
   m_Name: SecondMeleeEnemy
   m_TagString: Untagged
@@ -1266,6 +1309,7 @@ Transform:
   - {fileID: 7187716759486005253}
   - {fileID: 4593476625331992591}
   - {fileID: 8132853434816432392}
+  - {fileID: 1823068403352629383}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1349,19 +1393,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _maskAvoidance:
     serializedVersion: 2
-    m_Bits: 2048
+    m_Bits: 3072
   _rbTarget: {fileID: 0}
   _target: {fileID: 0}
   _radius: 3
-  _avoidWeight: 6
-  _distanceToAttack: 4
+  _avoidWeight: 30
+  _distanceToAttack: 2
   _speed: 3
   _speedRot: 2
   _timeToCheckPlayerPos: 5
   _timeToRespawn: 1
   _timePredictionChase: 2
   _attackRate: 0.5
-  _attackTrigger: {fileID: 7983127193404845337}
+  _attackTrigger: {fileID: 4135619688878997881}
   _playerDir: {x: 0, y: 0, z: 0}
 --- !u!114 &7983127193404845349
 MonoBehaviour:
@@ -1508,19 +1552,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!65 &7983127193404845337
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7983127193404845336}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.06428019, y: 0.03979544, z: 0.03671052}
-  m_Center: {x: -0.001256885, y: 0.0183106, z: 0.031152014}
 --- !u!1 &7994018140460751229
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿//IA2-P1
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
@@ -21,9 +23,6 @@ public class MeleeEnemyController : AbstractEnemy, IGridEntity
     {
         _secondEnemyModel = GetComponent<MeleeEnemyModel>();
         _secondEnemyView = GetComponent<MeleeEnemyView>();
-
-       // _pursuitObsAvoidance = new PursuitObstacleAvoidance(_secondEnemyModel._rbTarget, _secondEnemyModel._radius,
-          //  _secondEnemyModel._avoidWeight, _secondEnemyModel._maskAvoidance, _secondEnemyModel._timePredictionChase);
 
         EventManager.Subscribe("OnPlayerDead", DestroyObj);
     }

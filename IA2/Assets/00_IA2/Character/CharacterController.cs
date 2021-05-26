@@ -145,6 +145,7 @@ public class CharacterController : MonoBehaviour
     {
         if(other.gameObject.layer == 12)
         {
+
             Damage();
         }
 
