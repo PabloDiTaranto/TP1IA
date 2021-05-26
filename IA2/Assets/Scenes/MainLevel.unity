@@ -18811,8 +18811,9 @@ MonoBehaviour:
   - {fileID: 1807151408}
   playerTransform: {fileID: 2108196237}
   _grid: {fileID: 1406942041}
-  enemyPrefab: {fileID: 6902579794324573389, guid: 921915723b062a247a530f0b1e373ae8,
-    type: 3}
+  _enemyPrefab:
+  - {fileID: 6902579794324573389, guid: 921915723b062a247a530f0b1e373ae8, type: 3}
+  - {fileID: 7983127193404845336, guid: fb6f05b15c11fc74a897d0a9abcf58df, type: 3}
   maxEnemies: 6
   timeBetweenSpawns: 0.2
 --- !u!4 &1993124995

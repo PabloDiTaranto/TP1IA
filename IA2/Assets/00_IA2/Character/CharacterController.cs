@@ -14,6 +14,7 @@ public class CharacterController : MonoBehaviour
     private void Awake()
     {
         _characterModel = GetComponent<CharacterModel>();
+        _characterModel._rb = GetComponent<Rigidbody>();
         _characterModel._playerCam = GetComponentInChildren<Camera>();
         _specialAttack = GetComponent<SpecialAttack>();
         _characterModel._playerName = PlayerNameManager._name;

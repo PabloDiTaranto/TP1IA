@@ -25,7 +25,7 @@ public class CharacterModel : MonoBehaviour
     #endregion
 
     #region Rigidbody
-    [HideInInspector]
+    //[HideInInspector]
     public Rigidbody _rb;
     #endregion
 

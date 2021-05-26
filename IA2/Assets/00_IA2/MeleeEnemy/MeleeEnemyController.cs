@@ -22,20 +22,23 @@ public class MeleeEnemyController : AbstractEnemy, IGridEntity
         _secondEnemyModel = GetComponent<MeleeEnemyModel>();
         _secondEnemyView = GetComponent<MeleeEnemyView>();
 
-        _pursuitObsAvoidance = new PursuitObstacleAvoidance(_secondEnemyModel._rb, _secondEnemyModel._radius,
-            _secondEnemyModel._avoidWeight, _secondEnemyModel._maskAvoidance, _secondEnemyModel._timePredictionChase);
+       // _pursuitObsAvoidance = new PursuitObstacleAvoidance(_secondEnemyModel._rbTarget, _secondEnemyModel._radius,
+          //  _secondEnemyModel._avoidWeight, _secondEnemyModel._maskAvoidance, _secondEnemyModel._timePredictionChase);
 
         EventManager.Subscribe("OnPlayerDead", DestroyObj);
     }
     private void Start()
     {
         _currentLife = 2;
+        _pursuitObsAvoidance = new PursuitObstacleAvoidance(_secondEnemyModel._rbTarget, _secondEnemyModel._radius,
+            _secondEnemyModel._avoidWeight, _secondEnemyModel._maskAvoidance, _secondEnemyModel._timePredictionChase);
+
         var deadTransition = new DeadStateSecondEnemy<string>(this, _secondEnemyView);
-        var searchTransition = new SearchStateSecondEnemy<string>(this, _secondEnemyModel._target, _secondEnemyModel._rb, _lineOfSight, _agentPathfinding, 
+        var searchTransition = new SearchStateSecondEnemy<string>(this, _secondEnemyModel._target, _secondEnemyModel._rbTarget, _lineOfSight, _agentPathfinding, 
             _secondEnemyModel._speed, _secondEnemyModel._speedRot, _secondEnemyModel._timeToCheckPlayerPos, _secondEnemyView);
-        var chaseTransition = new ChaseStateSecondEnemy<string>(this, _secondEnemyModel._target, _secondEnemyModel._rb, _lineOfSight, _pursuitObsAvoidance, _secondEnemyModel._speed, _secondEnemyModel._speedRot, _secondEnemyView);
+        var chaseTransition = new ChaseStateSecondEnemy<string>(this, _secondEnemyModel._target, _secondEnemyModel._rbTarget, _lineOfSight, _pursuitObsAvoidance, _secondEnemyModel._speed, _secondEnemyModel._speedRot, _secondEnemyView);
         var respawnTransition = new RespawnStateSecondEnemy<string>(this,_secondEnemyView);
-        var attackTransition = new AttackStateSecondEnemy<string>(_secondEnemyModel, _secondEnemyView);
+        var attackTransition = new AttackStateSecondEnemy<string>(_secondEnemyModel, _secondEnemyView,this,_secondEnemyModel._target,_lineOfSight);
         _fsmEnemy = new FSM<string>(searchTransition);
 
         searchTransition.AddTransition("Dead", deadTransition);
@@ -92,7 +95,7 @@ public class MeleeEnemyController : AbstractEnemy, IGridEntity
     }
     void ToAttack()
     {
-        _fsmEnemy.Transition("Punch");
+        _fsmEnemy.Transition("Attack");
     }
     void ToChase()
     {
@@ -148,6 +151,7 @@ public class MeleeEnemyController : AbstractEnemy, IGridEntity
 
     private void OnDestroy()
     {
+        SpatialGrid._instance.Remove(this);
         EventManager.Unsubscribe("OnPlayerDead", DestroyObj);
     }
 

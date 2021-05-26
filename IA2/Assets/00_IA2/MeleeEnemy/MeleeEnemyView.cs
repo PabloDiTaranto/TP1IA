@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class MeleeEnemyView : MonoBehaviour
 {
-    [SerializeField] private Animator _animator;
-    [SerializeField] private AudioSource _audioSource;
+    private Animator _animator;
+    private AudioSource _audioSource;
     [SerializeField] private AudioClip[] _clips;
     private void Awake()
     {
         _animator = GetComponent<Animator>();
+        _audioSource = GetComponent<AudioSource>();
     }
 
     private void Update()
@@ -36,8 +37,8 @@ public class MeleeEnemyView : MonoBehaviour
     }
 
 
-    public void DeathAnim()
+    public void DeathAnim(bool value)
     {
-        _animator.SetTrigger("isDeath");
+        _animator.SetBool("isDead",value);
     }
 }

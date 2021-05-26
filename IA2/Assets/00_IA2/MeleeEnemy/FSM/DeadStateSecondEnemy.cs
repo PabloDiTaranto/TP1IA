@@ -14,12 +14,14 @@ public class DeadStateSecondEnemy<T>:  State<T>
 
     public override void Awake()
     {
-        _secondEnemyView.DeathAnim();
-        _secondEnemyView.OneShotSoundClip(0);
     }
 
     public override void Execute()
     {
+        Debug.Log("Dead");
+        _secondEnemyView.AttackAnim(false);
+        _secondEnemyView.DeathAnim(true);
+        _secondEnemyView.OneShotSoundClip(0);
         _secondEnemyController._isTimeToRespawn.Execute();
     }
 }
