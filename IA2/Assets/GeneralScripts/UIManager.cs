@@ -7,14 +7,14 @@ using TMPro;
 public class UIManager : MonoBehaviour
 {
     [SerializeField] private Image healthBar;
-    [SerializeField] private TextMeshProUGUI time, ammo;
+    [SerializeField] private TextMeshProUGUI time, energy;
     [SerializeField] private GameObject uiCanvas;
 
     private void Awake()
     {
         EventManager.Subscribe("OnTimeMod", SetTime);
         EventManager.Subscribe("OnPlayerLifeChange", SetHealtBarAmmount);
-        EventManager.Subscribe("OnAmmoChange", SetAmmo);
+        EventManager.Subscribe("OnChangedEnergy", SetEnergy);
         EventManager.Subscribe("OnGameOver", HideUI);
     }
 
@@ -28,9 +28,9 @@ public class UIManager : MonoBehaviour
         time.text = Mathf.Round((float)parameters[0]).ToString();
     }
 
-    private void SetAmmo(params object[] parameters)
+    private void SetEnergy(params object[] parameters)
     {
-        ammo.text = "x " + ((int)parameters[0]).ToString();
+        energy.text = "Energy: " + ((int)parameters[0]).ToString();
     }
 
     private void HideUI(params object[] parameters)

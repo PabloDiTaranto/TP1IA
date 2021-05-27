@@ -29,7 +29,7 @@ public class PopUpCanvas : MonoBehaviour
         enemiesKills.text = "Deaths: " + kills[1].ToString();
 
         _popUpPanel.SetActive(true);
-        if (kills[0] >= 15 && kills[0] > kills[1])//////////////////
+        if (kills[0] >= 15 && kills[0] > kills[1])
         {
             _rankingsText.gameObject.SetActive(false);
             audioSource.Stop();
@@ -71,7 +71,6 @@ public class PopUpCanvas : MonoBehaviour
         resultText.gameObject.SetActive(false);
         _rankingsText.gameObject.SetActive(true);
         UIFinishedButtons(true, false);
-        //EventManager.Trigger("OnChangedRanking");
         RankingsPopUp();
     }
 
@@ -84,7 +83,6 @@ public class PopUpCanvas : MonoBehaviour
         foreach (var item in getText)
         {
             _rankingsText.text += "\n"+ item;
-            Debug.Log(item);
         }
     }
 

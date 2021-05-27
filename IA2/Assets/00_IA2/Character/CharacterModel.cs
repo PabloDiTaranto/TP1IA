@@ -10,12 +10,14 @@ public class CharacterModel : MonoBehaviour
     public float Speed { get { return _speed; } }
     #endregion
 
-    #region Bullet Values
+    #region Attack Values
     [SerializeField]
     private GameObject _bullet;
     public GameObject Bullet { get { return _bullet; } }
 
     public Transform _spawnPosition;
+
+    public int _currentEnergy = 0;
     #endregion
 
     #region Shoot Point
@@ -62,7 +64,5 @@ public class CharacterModel : MonoBehaviour
 
     public string _playerName;
     #endregion
-
-
 
 }

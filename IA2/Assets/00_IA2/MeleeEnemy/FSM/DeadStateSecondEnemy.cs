@@ -18,7 +18,6 @@ public class DeadStateSecondEnemy<T>:  State<T>
 
     public override void Execute()
     {
-        Debug.Log("Dead");
         _secondEnemyView.AttackAnim(false);
         _secondEnemyView.DeathAnim(true);
         _secondEnemyView.OneShotSoundClip(0);

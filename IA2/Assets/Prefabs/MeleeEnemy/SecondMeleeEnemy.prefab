@@ -1375,6 +1375,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _isDead: 0
+  _items: []
   _lineOfSight: {fileID: 7983127193404845348}
   _secondEnemyModel: {fileID: 0}
   _secondEnemyView: {fileID: 0}

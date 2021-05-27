@@ -9,4 +9,7 @@ public abstract class AbstractEnemy: MonoBehaviour
     [HideInInspector]
     public bool _isDead;
     public abstract void Damage();
+
+    public string[] _items;
+
 }

@@ -7,6 +7,7 @@ public class CharacterController : MonoBehaviour
 {
     private SpecialAttack _specialAttack;
     private CharacterModel _characterModel;
+    private ObtainEnergy _obtainEnergy;
     private float lerpTimer;
     private bool _canShoot;
     private bool _isDead;
@@ -18,15 +19,18 @@ public class CharacterController : MonoBehaviour
         _characterModel._playerCam = GetComponentInChildren<Camera>();
         _specialAttack = GetComponent<SpecialAttack>();
         _characterModel._playerName = PlayerNameManager._name;
+        _obtainEnergy = GetComponent<ObtainEnergy>();
     }
 
     private void Start()
     {
         _characterModel.CurrentLife = _characterModel.MaxLife;
         EventManager.Trigger("OnPlayerLifeChange", _characterModel.CurrentLife, _characterModel.MaxLife);
+        EventManager.Trigger("OnChangedEnergy", _characterModel._currentEnergy);
         _canShoot = true;
         _isDead = false;
         Cursor.lockState = CursorLockMode.Locked;
+
     }
 
     private void Update()
@@ -55,7 +59,17 @@ public class CharacterController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Mouse1))
         {
+            if (_characterModel._currentEnergy <= 0) return;
+
             _specialAttack.Attack();
+            _characterModel._currentEnergy--;
+            EventManager.Trigger("OnChangedEnergy", _characterModel._currentEnergy);
+        }
+
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            _obtainEnergy.GetEnergy();
+            EventManager.Trigger("OnChangedEnergy", _characterModel._currentEnergy);
         }
 
     }

@@ -38,7 +38,6 @@ public class SearchStateSecondEnemy<T> : State<T>
 
     public override void Execute()
     {
-        Debug.Log("SearchExecute");
         if (!_secondEnemyController.HasLife())
             _secondEnemyController._isTimeToRespawn.Execute();
         if (_timer >= _timeToCheckPlayerPos || _endList)

@@ -9,7 +9,7 @@ public class SpecialAttack : MonoBehaviour
     private SquareQuery _query;
     [SerializeField] ParticleSystem _attackParticle;
 
-    void Start()
+    void Awake()
     {
         _character = FindObjectOfType<CharacterController>();
         _query = FindObjectOfType<SquareQuery>();
@@ -29,8 +29,6 @@ public class SpecialAttack : MonoBehaviour
         RaycastHit hit;
         foreach (var item in result)
         {
-            Debug.Log(item);
-
             var twoDimensionPlayer = new Vector3(_character.transform.position.x, 0.5f, _character.transform.position.z);
             var twoDimensionEnemy = new Vector3(item.transform.position.x, 0.5f, item.transform.position.z);
             var dir = twoDimensionEnemy - twoDimensionPlayer;
@@ -43,7 +41,6 @@ public class SpecialAttack : MonoBehaviour
                         * hit.distance, Color.magenta);
                     print(hit.transform);
                     item.Damage();
-                    print("Ray");
                 }
             }
         }

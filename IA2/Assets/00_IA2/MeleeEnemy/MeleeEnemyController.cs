@@ -25,6 +25,15 @@ public class MeleeEnemyController : AbstractEnemy, IGridEntity
         _secondEnemyView = GetComponent<MeleeEnemyView>();
 
         EventManager.Subscribe("OnPlayerDead", DestroyObj);
+
+        for (int i = 0; i < _items.Length; i++)
+        {
+            float randomValue = UnityEngine.Random.Range(0f, 1f);
+            if (randomValue <= 0.10f)
+                _items[i] = "Energy";
+            else
+                _items[i] = "Empty";
+        }
     }
     private void Start()
     {

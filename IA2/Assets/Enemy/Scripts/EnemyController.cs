@@ -2,10 +2,10 @@
 //IA2-P1
 //(Este enemigo fue desarrollado durante la cursada de IA1)
 
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class EnemyController : AbstractEnemy,IGridEntity
 {
@@ -38,6 +38,18 @@ public class EnemyController : AbstractEnemy,IGridEntity
 
         OnMove += SpatialGrid._instance.UpdateEntity;
         SpatialGrid._instance.UpdateEntity(this);
+
+        _items = new string[4];
+
+
+        for (int i = 0; i < _items.Length; i++)
+        {
+            float randomValue = UnityEngine.Random.Range(0f, 1f);
+            if (randomValue <= 0.10f)
+                _items[i] = "Energy";
+            else
+                _items[i] = "Empty";
+        }
     }
 
     private void Start()

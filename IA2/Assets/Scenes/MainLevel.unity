@@ -3009,10 +3009,10 @@ RectTransform:
   m_Father: {fileID: 1596333096}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 182, y: -75}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMin: {x: 0.294, y: 0.81967765}
+  m_AnchorMax: {x: 0.45533338, y: 0.97170377}
+  m_AnchoredPosition: {x: -183, y: -45}
+  m_SizeDelta: {x: -210, y: -64}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &322305309
 MonoBehaviour:
@@ -14541,7 +14541,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   healthBar: {fileID: 185382578}
   time: {fileID: 718748992}
-  ammo: {fileID: 1864582956}
+  energy: {fileID: 1864582956}
   uiCanvas: {fileID: 1596333092}
 --- !u!4 &1608114409 stripped
 Transform:
@@ -17517,12 +17517,12 @@ GameObject:
   - component: {fileID: 1864582957}
   - component: {fileID: 1864582956}
   m_Layer: 5
-  m_Name: AmmoTextPro
+  m_Name: EnergyText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1864582955
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17537,10 +17537,10 @@ RectTransform:
   m_Father: {fileID: 1596333096}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.10545503, y: 0.8365926}
-  m_AnchorMax: {x: 0.22100002, y: 0.93464273}
-  m_AnchoredPosition: {x: 55.097656, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.2533333, y: 0.81967765}
+  m_AnchorMax: {x: 0.5438542, y: 0.97170377}
+  m_AnchoredPosition: {x: -12, y: -11}
+  m_SizeDelta: {x: -336, y: -58}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1864582956
 MonoBehaviour:
@@ -17560,7 +17560,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'x180
+  m_text: '0
 
 '
   m_isRightToLeft: 0
@@ -17629,10 +17629,10 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: -105.569916, y: 0, z: -139.3492, w: 0}
   m_textInfo:
     textComponent: {fileID: 1864582956}
-    characterCount: 5
+    characterCount: 2
     spriteCount: 0
     spaceCount: 1
     wordCount: 1
@@ -19543,6 +19543,7 @@ GameObject:
   - component: {fileID: 2108196231}
   - component: {fileID: 2108196233}
   - component: {fileID: 2108196242}
+  - component: {fileID: 2108196243}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -19565,6 +19566,7 @@ MonoBehaviour:
   _speed: 5
   _bullet: {fileID: 8821135667369095012, guid: 543e605595ac62e49b6d9fceb973144c, type: 3}
   _spawnPosition: {fileID: 1001466069}
+  _currentEnergy: 0
   _shootPoint: {fileID: 18648299}
   _rb: {fileID: 2108196238}
   _myDir: {x: 0, y: 0, z: 0}
@@ -19993,6 +19995,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _attackParticle: {fileID: 4086739749118027545, guid: bbd56922fc3fa5247a61d118b13a237e,
     type: 3}
+--- !u!114 &2108196243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2108196230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aefd77051053f2428fd64f1d7bf78b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2109009679 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7089823039546908690, guid: 34f13f42aa37fe042ab6574480847195,

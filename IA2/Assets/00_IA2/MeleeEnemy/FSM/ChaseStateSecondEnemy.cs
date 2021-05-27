@@ -29,7 +29,6 @@ public class ChaseStateSecondEnemy<T> : State<T>
 
     public override void Execute()
     {
-        Debug.Log("ChaseExecute");
         if (!_secondEnemyController.HasLife())
             _secondEnemyController._isTimeToRespawn.Execute();
         if (!_lineOfSight.IsInSight(_target))
@@ -42,7 +41,6 @@ public class ChaseStateSecondEnemy<T> : State<T>
 
     public void Move(Vector3 dir)
     {
-        Debug.Log("MoveChase");
         dir.y = 0;
         _secondEnemyController.transform.position += Time.deltaTime * dir * _speed; ;
         _secondEnemyController.transform.forward = Vector3.Lerp(_secondEnemyController.transform.forward, dir, _speedRot * Time.deltaTime);
