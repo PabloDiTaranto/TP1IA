@@ -22,6 +22,7 @@ public class AttackStateSecondEnemy<T> : State<T>
     public override void Awake()
     {
         _secondEnemyModel._attackTrigger.enabled = false;
+        _secondEnemyView.OneShotSoundClip(1);
     }
 
     public override void Execute()
@@ -38,7 +39,6 @@ public class AttackStateSecondEnemy<T> : State<T>
         _secondEnemyModel._attackTrigger.enabled = false;
         if (_timer < _secondEnemyModel._attackRate) return;
 
-        _secondEnemyView.OneShotSoundClip(1);
         _secondEnemyView.AttackAnim(true);
         _secondEnemyModel._attackTrigger.enabled = true;
         _timer = 0;

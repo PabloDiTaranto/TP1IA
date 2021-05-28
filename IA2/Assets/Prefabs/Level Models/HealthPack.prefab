@@ -107,7 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aef6bbcd7557e5c4aacdde1541144492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifeRecover: 2
+  lifeRecover: 30
   myCollider: {fileID: 5091318794062079931}
   myRenderer: {fileID: 3153769053339746471}
   myAudio: {fileID: 7115242255262661276}

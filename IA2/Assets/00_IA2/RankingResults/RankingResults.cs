@@ -44,7 +44,12 @@ public class RankingResults : MonoBehaviour
         var players = _players.OrderByDescending(n => n._newScore)
                               .Take(5);
 
-        var scoreList = players.Select(n => n._newScore);
+        var scoreList = players.Aggregate(new List<int>(), (newScoreList, player) =>
+        {
+            newScoreList.Add(player._newScore);
+            return newScoreList;
+        });
+
         var namesList = players.Select(n => n._playerName);
 
         _players = players.ToArray();

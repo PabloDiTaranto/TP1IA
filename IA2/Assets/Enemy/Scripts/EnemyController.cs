@@ -45,7 +45,7 @@ public class EnemyController : AbstractEnemy,IGridEntity
         for (int i = 0; i < _items.Length; i++)
         {
             float randomValue = UnityEngine.Random.Range(0f, 1f);
-            if (randomValue <= 0.10f)
+            if (randomValue <= 0.15f)
                 _items[i] = "Energy";
             else
                 _items[i] = "Empty";
