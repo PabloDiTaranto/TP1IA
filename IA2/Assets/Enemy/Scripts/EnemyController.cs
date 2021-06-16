@@ -15,7 +15,7 @@ public class EnemyController : AbstractEnemy,IGridEntity
     [SerializeField] private AgentPathfinding _agentPF;
     private float timerRespawn;
     [SerializeField] private LineOfSight lineOfSight;
-    private FSM<string> fsmEnemy;
+    private FSMachine<string> fsmEnemy;
 
     private ISteering pursuitObsAvoidance, seekObsAvoidance, seekBullet, pursuitBullet;
     
@@ -60,7 +60,7 @@ public class EnemyController : AbstractEnemy,IGridEntity
         var chaseTransition = new ChaseStateEnemy<string>(this, enemy.target, rb, lineOfSight, pursuitObsAvoidance, enemy.speed, enemy.speedRot, enemyView);
         var fireTransition = new FiringStateEnemy<string>(this, enemy.target, rb, lineOfSight, enemy.fireRate, enemy.bulletPrefab, enemy.spawnBullets, seekBullet, pursuitBullet, enemyView);
         var respawnTransition = new RespawnStateEnemy<string>(this, enemyView);
-        fsmEnemy = new FSM<string>(searchTransition);
+        fsmEnemy = new FSMachine<string>(searchTransition);
 
         searchTransition.AddTransition("Dead", deadTransition);
         searchTransition.AddTransition("Chase", chaseTransition);

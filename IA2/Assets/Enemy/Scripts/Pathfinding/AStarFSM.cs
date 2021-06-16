@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AStar<T>
+public class AStarFSM<T>
 {
     public delegate bool Satisfies(T curr);
     public delegate List<T> GetNeighbours(T curr);
@@ -12,7 +12,7 @@ public class AStar<T>
     {
         Dictionary<T, float> cost = new Dictionary<T, float>();
         Dictionary<T, T> parents = new Dictionary<T, T>();
-        PriorityQueue<T> pending = new PriorityQueue<T>();
+        PriorityQueueFSM<T> pending = new PriorityQueueFSM<T>();
         HashSet<T> visited = new HashSet<T>();
         pending.Enqueue(start, 0);
         cost.Add(start, 0);

@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerModel _playerModel;
     private PlayerView _playerView;
-    private FSM<string> _fsm, _weaponFsm;
+    private FSMachine<string> _fsm, _weaponFsm;
     [SerializeField]
     private float _rotSpeed = 180f;
 
@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         _fire.AddTransition("Reload", _reload);
         _reload.AddTransition("Fire", _fire);
 
-        _weaponFsm = new FSM<string>(_fire);
+        _weaponFsm = new FSMachine<string>(_fire);
 
         var _idle = new IdleStatePlayer<string>(_playerModel, _weaponFsm, this);
         var _move = new MoveStatePlayer<string>(_playerModel, _weaponFsm, this, _playerView);
@@ -47,7 +47,7 @@ public class PlayerController : MonoBehaviour
         _respawn.AddTransition("Move", _move);
         
 
-        _fsm = new FSM<string>(_idle);        
+        _fsm = new FSMachine<string>(_idle);        
     }
 
     private void Update()

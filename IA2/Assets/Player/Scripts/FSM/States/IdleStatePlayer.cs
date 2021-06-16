@@ -6,9 +6,9 @@ public class IdleStatePlayer<T> : State<T>
 {
     private PlayerModel _playerModel;
     private PlayerController _playerController;
-    private FSM<string> _weaponFSM;
+    private FSMachine<string> _weaponFSM;
 
-    public IdleStatePlayer(PlayerModel player, FSM<string> weaponFSM, PlayerController playerController)
+    public IdleStatePlayer(PlayerModel player, FSMachine<string> weaponFSM, PlayerController playerController)
     {
         _playerModel = player;
         _weaponFSM = weaponFSM;

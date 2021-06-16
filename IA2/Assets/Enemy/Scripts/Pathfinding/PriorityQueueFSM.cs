@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class PriorityQueue<TData>
+public class PriorityQueueFSM<TData>
 {
     public bool IsEmpty { get { return data.Count < 1; } }
 
@@ -9,14 +9,14 @@ public class PriorityQueue<TData>
     private Dictionary<TData, int> indexes;
     private Func<float, float, bool> critery;
 
-    public PriorityQueue()
+    public PriorityQueueFSM()
     {
         data = new List<Tuple<TData, float>>();
         indexes = new Dictionary<TData, int>();
         critery = (x, y) => x.CompareTo(y) < 0;
     }
 
-    public PriorityQueue(Func<float, float, bool> critery)
+    public PriorityQueueFSM(Func<float, float, bool> critery)
     {
         data = new List<Tuple<TData, float>>();
         indexes = new Dictionary<TData, int>();

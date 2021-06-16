@@ -7,9 +7,9 @@ public class MoveStatePlayer<T> : State<T>
     PlayerModel _playerModel;
     PlayerView _playerView;
     PlayerController _playerController;
-    FSM<string> _weaponFSM;
+    FSMachine<string> _weaponFSM;
 
-    public MoveStatePlayer(PlayerModel player, FSM<string> weaponFSM, PlayerController playerController, PlayerView playerView)
+    public MoveStatePlayer(PlayerModel player, FSMachine<string> weaponFSM, PlayerController playerController, PlayerView playerView)
     {
         _playerModel = player;
         _playerController = playerController;

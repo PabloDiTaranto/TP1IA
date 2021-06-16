@@ -6,7 +6,7 @@ public class AgentPathfinding : MonoBehaviour
 {
     private List<Vector3> _listVector;
     [SerializeField] private LayerMask maskPF;
-    private AStar<Vector3> _aStarVector = new AStar<Vector3>();
+    private AStarFSM<Vector3> _aStarVector = new AStarFSM<Vector3>();
     [SerializeField] private Transform _target;
     [SerializeField] private float distanceMax;
 

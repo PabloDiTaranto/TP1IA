@@ -15,7 +15,7 @@ public class MeleeEnemyController : AbstractEnemy, IGridEntity
     private ActionNode _actionDead, _actionSearch, _actionChase, _actionAttack, _actionRespawn;
     public QuestionNode _isTimeToRespawn, _isSearching, _isPlayerOnSight, _isOnDistanceAttack;
     private ISteering _pursuitObsAvoidance, _seekObsAvoidance, _seekBullet, _pursuitBullet;
-    private FSM<string> _fsmEnemy;
+    private FSMachine<string> _fsmEnemy;
     private float _timerRespawn;
     private INode _init;
 
@@ -47,7 +47,7 @@ public class MeleeEnemyController : AbstractEnemy, IGridEntity
         var chaseTransition = new ChaseStateSecondEnemy<string>(this, _secondEnemyModel._target, _secondEnemyModel._rbTarget, _lineOfSight, _pursuitObsAvoidance, _secondEnemyModel._speed, _secondEnemyModel._speedRot, _secondEnemyView);
         var respawnTransition = new RespawnStateSecondEnemy<string>(this,_secondEnemyView);
         var attackTransition = new AttackStateSecondEnemy<string>(_secondEnemyModel, _secondEnemyView,this,_secondEnemyModel._target,_lineOfSight);
-        _fsmEnemy = new FSM<string>(searchTransition);
+        _fsmEnemy = new FSMachine<string>(searchTransition);
 
         searchTransition.AddTransition("Dead", deadTransition);
         searchTransition.AddTransition("Chase", chaseTransition);
