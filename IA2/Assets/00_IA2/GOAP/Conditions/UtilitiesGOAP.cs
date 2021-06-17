@@ -9,20 +9,35 @@ public static class UtilitiesGOAP
     public static AbstractEnemy GetNearestEnemy(Vector3 position, LayerMask layerMask)
     {
         var radius = 50;///REVISAR
-        Collider[] enemy = Physics.OverlapSphere(position, radius, layerMask);
+        Collider[] enemy = Physics.OverlapSphere(position, radius);
 
-        return enemy.OfType<AbstractEnemy>()
-           .OrderBy(n => (position - n.transform.position).sqrMagnitude)
+        List<AbstractEnemy> enemiesList = new List<AbstractEnemy>();
+        foreach (var item in enemy)
+        {
+            if(item.gameObject.GetComponent<AbstractEnemy>())
+                enemiesList.Add(item.GetComponent<AbstractEnemy>());
+        }
+        var obtainedEnemy = enemiesList
+           .OrderBy(n => (n.transform.position - position).sqrMagnitude)
            .Where(n => !n._isDead)
            .FirstOrDefault();
+
+        Debug.Log(obtainedEnemy);
+        return obtainedEnemy;
     }
 
     public static bool IsNeededWeapon(EnemyType type, AbstractEnemy currentEnemy)
     {
-        if (currentEnemy.enemyType == type)
+        if (currentEnemy!=null&&currentEnemy.enemyType == type)
+        {
+            Debug.Log("true");
             return true;
+        }
 
         else
+        {
+            Debug.Log("false");
             return false;
+        }
     }
 }

@@ -35,8 +35,23 @@ public class EnemyGOAPController : MonoBehaviour
         distanceWeapon.OnNeedsReplan += OnReplan;
         distanceAttack.OnNeedsReplan += OnReplan;
         meleeAttack.OnNeedsReplan += OnReplan;
+        StartCoroutine("Test");
+    }
 
-        PlanAndExecute();
+    IEnumerator Test()
+    {
+        yield return new WaitForSeconds(3f);
+        var watchDog = 5000;
+        while (_currentEnemy==null&&watchDog>0)
+        {
+            watchDog -= 1;
+            ObtainedEnemy();
+        }
+        if (_currentEnemy)
+            PlanAndExecute();
+        else
+            Debug.Log(_currentEnemy);
+
     }
 
     List<GOAPAction> GOAPActionList()
@@ -75,7 +90,7 @@ public class EnemyGOAPController : MonoBehaviour
     GOAPState GetGOAPState()
     {
         var from = new GOAPState();
-        from.values["isEnemyNear"] = ObtainedEnemy();
+        from.values["isEnemyNear"] = _currentEnemy!=null;
         from.values["wantMeleeWeapon"] = UtilitiesGOAP.IsNeededWeapon(EnemyType.MELEE, _currentEnemy);
         from.values["wantDistanceWeapon"] = UtilitiesGOAP.IsNeededWeapon(EnemyType.RANGE, _currentEnemy);
         from.values["hasMeleeWeapon"] = _hasMeleeWeapon;
@@ -99,7 +114,7 @@ public class EnemyGOAPController : MonoBehaviour
         ConfigureFsm(plan);
     }
 
-    bool ObtainedEnemy()
+    private bool ObtainedEnemy()
     {
         _currentEnemy = UtilitiesGOAP.GetNearestEnemy(transform.position, layerMask);
 
