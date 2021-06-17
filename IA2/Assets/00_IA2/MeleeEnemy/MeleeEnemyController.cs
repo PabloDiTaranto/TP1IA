@@ -34,6 +34,8 @@ public class MeleeEnemyController : AbstractEnemy, IGridEntity
             else
                 _items[i] = "Empty";
         }
+
+        enemyType = EnemyType.MELEE;
     }
     private void Start()
     {

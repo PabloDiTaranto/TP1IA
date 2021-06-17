@@ -11,6 +11,7 @@ public class CharacterController : MonoBehaviour
     private float lerpTimer;
     private bool _canShoot;
     private bool _isDead;
+    public bool IsDead { get { return _isDead; } }
 
     private void Awake()
     {

@@ -50,6 +50,8 @@ public class EnemyController : AbstractEnemy,IGridEntity
             else
                 _items[i] = "Empty";
         }
+
+        enemyType = EnemyType.RANGE;
     }
 
     private void Start()

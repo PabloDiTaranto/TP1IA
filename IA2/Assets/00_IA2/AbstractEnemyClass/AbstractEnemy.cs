@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EnemyType
+{
+    MELEE,
+    RANGE
+}
 public abstract class AbstractEnemy: MonoBehaviour
 {
     protected float _currentLife;
@@ -11,5 +16,7 @@ public abstract class AbstractEnemy: MonoBehaviour
     public abstract void Damage();
 
     public string[] _items;
+
+    public EnemyType enemyType;
 
 }
