@@ -18,15 +18,25 @@ public class EnemyGOAPController : MonoBehaviour
     [SerializeField] LayerMask layerMask;
 
     private AbstractEnemy _currentEnemy;
+    public AbstractEnemy CurrentEnemy { get { return _currentEnemy; } }
 
-    private bool _hasMeleeWeapon;
-    private bool _hasDistanceWeapon;
+    public bool _hasMeleeWeapon;
+    public bool _hasDistanceWeapon;
 
     private CharacterController _character;
+
+    [SerializeField]private GameObject _meleeWeapon;
+    [SerializeField]private GameObject _distanceWeapon;
+
+    public GameObject MeleeWeapon { get { return _meleeWeapon; } }
+    public GameObject DistanceWeapon { get { return _distanceWeapon; } }
 
     private void Awake()
     {
         _character = FindObjectOfType<CharacterController>();
+        _meleeWeapon.SetActive(false);
+        _distanceWeapon.SetActive(false);
+
     }
     void Start()
     {
@@ -64,13 +74,13 @@ public class EnemyGOAPController : MonoBehaviour
 
                                               new GOAPAction("MeleeWeapon")
                                                  .Pre("isEnemyNear", true)
-                                                 .Pre("needMeleeWeapon", true)
+                                                 .Pre("wantMeleeWeapon", true)
                                                  .Effect("hasMeleeWeapon",    true)
                                                  .LinkedState(meleeWeapon),
 
                                               new GOAPAction("DistanceWeapon")
                                                  .Pre("isEnemyNear",   true)
-                                                 .Pre("needDistanceWeapon", true)
+                                                 .Pre("wantDistanceWeapon", true)
                                                  .Effect("hasDistanceWeapon",    true)
                                                  .LinkedState(distanceWeapon),
 
@@ -90,7 +100,7 @@ public class EnemyGOAPController : MonoBehaviour
     GOAPState GetGOAPState()
     {
         var from = new GOAPState();
-        from.values["isEnemyNear"] = _currentEnemy!=null;
+        from.values["isEnemyNear"] = UtilitiesGOAP.IsEnemyNear(transform.position, _currentEnemy.transform.position);
         from.values["wantMeleeWeapon"] = UtilitiesGOAP.IsNeededWeapon(EnemyType.MELEE, _currentEnemy);
         from.values["wantDistanceWeapon"] = UtilitiesGOAP.IsNeededWeapon(EnemyType.RANGE, _currentEnemy);
         from.values["hasMeleeWeapon"] = _hasMeleeWeapon;

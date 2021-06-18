@@ -40,4 +40,11 @@ public static class UtilitiesGOAP
             return false;
         }
     }
+
+    public static bool IsEnemyNear(Vector3 init, Vector3 finit)
+    {
+        return (finit - init).sqrMagnitude < 2 * 2;
+    }
+
+
 }

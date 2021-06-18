@@ -20,7 +20,6 @@ public class GoapPlanner {
                              state => Satisfies(state, to),
                              node => Explode(node, actions, ref _watchdog),
                              state => GetHeuristic(state, to));
-
         return CalculateGoap(path);
     }
 
@@ -39,7 +38,8 @@ public class GoapPlanner {
         return fsm;
     }
 
-    private IEnumerable<GOAPAction> CalculateGoap(IEnumerable<GOAPState> sequence) {
+    private IEnumerable<GOAPAction> CalculateGoap(IEnumerable<GOAPState> sequence) 
+    {
         foreach (var act in sequence.Skip(1)) {
             Debug.Log(act);
         }
