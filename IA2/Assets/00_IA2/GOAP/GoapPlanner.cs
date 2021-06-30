@@ -6,23 +6,49 @@ using FSM;
 using UnityEngine;
 
 public class GoapPlanner {
-    
+
     private const int _WATCHDOG_MAX = 200;
 
     private int _watchdog;
 
-    public IEnumerable<GOAPAction> Run(GOAPState from, GOAPState to, IEnumerable<GOAPAction> actions) {
+    private EnemyGOAPController _goapController;
+
+    public GoapPlanner(EnemyGOAPController goapController)
+    {
+        _goapController = goapController;
+    }
+
+    public void Run(GOAPState from, GOAPState to, IEnumerable<GOAPAction> actions, Func<IEnumerator, Coroutine> startCoroutine)
+        
+    {
+        Debug.Log("Run");
         _watchdog = _WATCHDOG_MAX;
 
         var astar = new AStar<GOAPState>();
 
-        var path = astar.Run(from,
+        astar.OnPathCompleted += OnPathCompleted;
+
+
+        astar.GetPath(from,
                              state => Satisfies(state, to),
                              node => Explode(node, actions, ref _watchdog),
-                             state => GetHeuristic(state, to));
-        return CalculateGoap(path);
+                             state => GetHeuristic(state, to),
+                             startCoroutine);
+
     }
 
+    private void OnPathCompleted(IEnumerable<GOAPState> path)
+    {
+        if (path == null)
+        {
+            Debug.Log("error");
+            return;
+        }
+        var getGOAP = CalculateGoap(path);
+        _goapController.SetPlan(getGOAP);
+        Debug.Log("entro");
+
+    }
     public static FiniteStateMachine ConfigureFSM(IEnumerable<GOAPAction> plan, Func<IEnumerator, Coroutine> startCoroutine){
         var prevState = plan.First().linkedState;
             

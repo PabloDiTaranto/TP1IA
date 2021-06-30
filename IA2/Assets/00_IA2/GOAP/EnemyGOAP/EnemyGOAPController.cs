@@ -117,10 +117,15 @@ public class EnemyGOAPController : MonoBehaviour
         var to = new GOAPState();
         to.values["isPlayerAlive"] = _character.IsDead;
 
-        var planner = new GoapPlanner();
+        var planner = new GoapPlanner(this);
 
-        var plan = planner.Run(from, to, actions);
+        planner.Run(from, to, actions,StartCoroutine);
 
+        //ConfigureFsm(plan);
+    }
+
+    public void SetPlan(IEnumerable<GOAPAction> plan)
+    {
         ConfigureFsm(plan);
     }
 
@@ -149,11 +154,11 @@ public class EnemyGOAPController : MonoBehaviour
         var to = new GOAPState();
         to.values["isPlayerAlive"] = false;
 
-        var planner = new GoapPlanner();
+        var planner = new GoapPlanner(this);
 
-        var plan = planner.Run(from, to, actions);
+        planner.Run(from, to, actions, StartCoroutine);
 
-        ConfigureFsm(plan);
+        //ConfigureFsm(plan);
     }
 
     private void ConfigureFsm(IEnumerable<GOAPAction> plan)
