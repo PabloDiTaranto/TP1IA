@@ -5,29 +5,38 @@ using FSM;
 
 public class ChaseGOAPState : MonoBaseState
 {
+    private bool executeOnce;
     public float speed = 2f;
     public float distanceToStealWeapon = 1.5f;
-    private EnemyGOAPController enemyGOAPController;
+    private EnemyGOAPController _enemyGOAPController;
     private void Awake()
     {
-        enemyGOAPController = FindObjectOfType<EnemyGOAPController>();
+        _enemyGOAPController = FindObjectOfType<EnemyGOAPController>();
     }
 
     public override void UpdateLoop()
     {
-        var dir = (enemyGOAPController.CurrentEnemy.transform.position - transform.position).normalized;
+        if (!executeOnce)
+        {
+            _enemyGOAPController._enemyGOAPView.HealAnim(false);
+            _enemyGOAPController._enemyGOAPView.MeleeHitAnim(false);
+            _enemyGOAPController._enemyGOAPView.ShootAnim(false);
+            _enemyGOAPController._enemyGOAPView.GrabWeaponAnim(false);
+            executeOnce = true;
+        }
+        var dir = (_enemyGOAPController.CurrentEnemy.transform.position - transform.position).normalized;
 
         transform.position += dir * (speed * Time.deltaTime);
     }
 
     public override IState ProcessInput()
     {
-        var sqrDistance = (enemyGOAPController.CurrentEnemy.transform.position - transform.position).sqrMagnitude;
+        var sqrDistance = (_enemyGOAPController.CurrentEnemy.transform.position - transform.position).sqrMagnitude;
         if(sqrDistance < distanceToStealWeapon)
         {
-            if (enemyGOAPController.CurrentEnemy.enemyType == EnemyType.MELEE && Transitions.ContainsKey("OnMeleeWeaponGOAP"))
+            if (_enemyGOAPController.CurrentEnemy.enemyType == EnemyType.MELEE && Transitions.ContainsKey("OnMeleeWeaponGOAP"))
                 return Transitions["OnMeleeWeaponGOAP"];
-            if (enemyGOAPController.CurrentEnemy.enemyType == EnemyType.RANGE && Transitions.ContainsKey("OnDistanceWeaponGOAP"))
+            if (_enemyGOAPController.CurrentEnemy.enemyType == EnemyType.RANGE && Transitions.ContainsKey("OnDistanceWeaponGOAP"))
                 return Transitions["OnDistanceWeaponGOAP"];
         }
 

@@ -31,11 +31,14 @@ public class EnemyGOAPController : MonoBehaviour
     public GameObject MeleeWeapon { get { return _meleeWeapon; } }
     public GameObject DistanceWeapon { get { return _distanceWeapon; } }
 
+    public EnemyGOAPView _enemyGOAPView;
+
     private void Awake()
     {
         _character = FindObjectOfType<CharacterController>();
         _meleeWeapon.SetActive(false);
         _distanceWeapon.SetActive(false);
+        _enemyGOAPView = GetComponent<EnemyGOAPView>();
 
     }
     void Start()
