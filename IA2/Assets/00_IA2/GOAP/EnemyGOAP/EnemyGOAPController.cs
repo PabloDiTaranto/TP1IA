@@ -32,6 +32,7 @@ public class EnemyGOAPController : MonoBehaviour
     public GameObject DistanceWeapon { get { return _distanceWeapon; } }
 
     public EnemyGOAPView _enemyGOAPView;
+    public EnemyGOAPModel _enemyGOAPModel;
 
     private void Awake()
     {

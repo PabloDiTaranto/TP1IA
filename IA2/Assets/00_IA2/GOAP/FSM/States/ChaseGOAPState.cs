@@ -16,6 +16,8 @@ public class ChaseGOAPState : MonoBaseState
 
     public override void UpdateLoop()
     {
+        _enemyGOAPController.transform.LookAt(_enemyGOAPController.CurrentEnemy.transform);
+
         if (!executeOnce)
         {
             _enemyGOAPController._enemyGOAPView.HealAnim(false);
@@ -24,9 +26,11 @@ public class ChaseGOAPState : MonoBaseState
             _enemyGOAPController._enemyGOAPView.GrabWeaponAnim(false);
             executeOnce = true;
         }
+
         var dir = (_enemyGOAPController.CurrentEnemy.transform.position - transform.position).normalized;
 
         transform.position += dir * (speed * Time.deltaTime);
+
     }
 
     public override IState ProcessInput()

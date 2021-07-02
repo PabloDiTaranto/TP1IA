@@ -7,4 +7,7 @@ public class EnemyGOAPModel : MonoBehaviour
     public LayerMask _maskAvoidance;
     public Rigidbody _rbTarget;
 
+    public GameObject _bulletPrefab;
+    public Transform _spawnPoint;
+
 }

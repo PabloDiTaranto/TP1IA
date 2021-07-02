@@ -14604,6 +14604,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f78fa445be7a54849beed5d96577d2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _fireRate: 0
+  distanceBetweenTarget: 0
+  _speed: 0
 --- !u!114 &1588770394
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14616,6 +14619,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82216e0f94ef51e498264e40e7a8ebf8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _attackTrigger: {fileID: 0}
+  distanceBetweenTarget: 1.5
+  _timer: 0
+  speed: 2
+  _attackRate: 0
 --- !u!114 &1588770395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14641,6 +14649,7 @@ MonoBehaviour:
   _meleeWeapon: {fileID: 1607599600}
   _distanceWeapon: {fileID: 1175840092}
   _enemyGOAPView: {fileID: 0}
+  _enemyGOAPModel: {fileID: 0}
 --- !u!4 &1588770396
 Transform:
   m_ObjectHideFlags: 0
@@ -19217,7 +19226,7 @@ MonoBehaviour:
   _enemyPrefab:
   - {fileID: 6902579794324573389, guid: 921915723b062a247a530f0b1e373ae8, type: 3}
   - {fileID: 7983127193404845336, guid: fb6f05b15c11fc74a897d0a9abcf58df, type: 3}
-  maxEnemies: 6
+  maxEnemies: 1
   timeBetweenSpawns: 0.2
 --- !u!4 &1993124995
 Transform:
