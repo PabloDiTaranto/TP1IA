@@ -47,6 +47,7 @@ public class MeleeAttackGOAP : MonoBaseState
             if (_timer < _attackRate)
             {
                 _enemyGOAPController._enemyGOAPView.MeleeHitAnim(false);
+                _attackTrigger.enabled = false;
                 return;
             }
             _attackTrigger.enabled = true;
