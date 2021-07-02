@@ -37,10 +37,12 @@ public class DistanceAttackGOAP : MonoBaseState
             var dir = (_player.transform.position - transform.position).normalized;
             dir.y = 0;
             transform.position += dir * (_speed * Time.deltaTime);
+            _enemyGOAPController._enemyGOAPView.SetSpeed(dir);
         }
 
         else
         {
+            _enemyGOAPController._enemyGOAPView.SetSpeed(Vector3.zero);
             if (_timerRate >= _fireRate)
             {
                 _enemyGOAPController._enemyGOAPView.ShootAnim(true);
@@ -56,6 +58,7 @@ public class DistanceAttackGOAP : MonoBaseState
 
     public override IState ProcessInput()
     {
+        executeOnce = false;
         return this;
     }
 

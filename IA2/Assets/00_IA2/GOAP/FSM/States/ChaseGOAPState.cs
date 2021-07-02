@@ -37,6 +37,7 @@ public class ChaseGOAPState : MonoBaseState
         var dir = (_enemyGOAPController.CurrentEnemy.transform.position - transform.position).normalized;
 
         transform.position += dir * (speed * Time.deltaTime);
+        _enemyGOAPController._enemyGOAPView.SetSpeed(dir);
 
     }
 

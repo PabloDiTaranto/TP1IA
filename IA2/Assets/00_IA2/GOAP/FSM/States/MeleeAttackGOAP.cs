@@ -39,10 +39,12 @@ public class MeleeAttackGOAP : MonoBaseState
             var dir = (_player.transform.position - transform.position).normalized;
             dir.y = 0;
             transform.position += dir * (speed * Time.deltaTime);
+            _enemyGOAPController._enemyGOAPView.SetSpeed(dir);
         }
 
         else
         {
+            _enemyGOAPController._enemyGOAPView.SetSpeed(Vector3.zero);
             _timer += Time.deltaTime;
             if (_timer < _attackRate)
             {
@@ -60,6 +62,7 @@ public class MeleeAttackGOAP : MonoBaseState
 
     public override IState ProcessInput()
     {
+        executeOnce = false;
         return this;
     }
 }

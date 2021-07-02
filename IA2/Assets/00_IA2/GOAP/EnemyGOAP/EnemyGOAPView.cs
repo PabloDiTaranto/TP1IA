@@ -56,4 +56,9 @@ public class EnemyGOAPView : MonoBehaviour
     {
         _animator.SetBool("isHealing", value);
     }
+
+    public void SetSpeed(Vector3 dir)
+    {
+        _animator.SetFloat("Speed",dir.normalized.magnitude);
+    }
 }
