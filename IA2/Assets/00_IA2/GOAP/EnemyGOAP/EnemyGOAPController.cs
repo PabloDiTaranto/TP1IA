@@ -156,6 +156,7 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity
     }
     public void AbortPlan()
     {
+        _enemyGOAPView.SetSpeed(Vector3.zero);
         _fsm.Active = false;
     }
     public void SetPlan(IEnumerable<GOAPAction> plan)
