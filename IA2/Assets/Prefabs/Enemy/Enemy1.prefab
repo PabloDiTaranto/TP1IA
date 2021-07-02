@@ -1923,7 +1923,6 @@ MonoBehaviour:
   playerDir: {x: 0, y: 0, z: 0}
   radius: 3
   avoidWeight: 6
-  life: 1
   distanceToFire: 9
   speed: 3
   speedRot: 2
@@ -2271,6 +2270,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15773b6ae2d2a46478295d56aefab1e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isDead: 0
+  _items: []
+  enemyType: 0
   rb: {fileID: 617630190784205587}
   enemy: {fileID: 7918130750723829899}
   enemyView: {fileID: 3024132465565630860}

@@ -48,7 +48,7 @@ public class EnemySpawner : MonoBehaviour
 
         var randomIndexEnemy = Random.Range(0, 2);
 
-        Instantiate(_enemyPrefab[0], spawnPos.position, Quaternion.identity, _grid);
+        Instantiate(_enemyPrefab[randomIndexEnemy], spawnPos.position, Quaternion.identity, _grid);
         enemiesOnScene++;
 
     }

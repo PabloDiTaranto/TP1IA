@@ -61,9 +61,12 @@ public class DistanceAttackGOAP : MonoBaseState
 
     private void Shoot()
     {
-        _enemyGOAPController._enemyGOAPModel._bulletPrefab.transform.position = _enemyGOAPController._enemyGOAPModel._spawnPoint.position;
-        //_bulletPrefab.transform.forward = sb.GetDir(_spawnBullet.transform.position);
-        Object.Instantiate(_enemyGOAPController._enemyGOAPModel._bulletPrefab);
+       // _enemyGOAPController._enemyGOAPModel._bulletPrefab.transform.position = _enemyGOAPController._enemyGOAPModel._spawnPoint.position;
+        var bullet = Object.Instantiate(_enemyGOAPController._enemyGOAPModel._bulletPrefab, _enemyGOAPController._enemyGOAPModel._spawnPoint.position, _enemyGOAPController._enemyGOAPModel._spawnPoint.rotation);
+        var dir = (_player.transform.position - bullet.transform.position);
+        dir.y = 0;
+        bullet.transform.forward = dir;
+
         _enemyGOAPController._enemyGOAPView.OneShotSoundClip(0);
         _timerRate = 0f;
     }

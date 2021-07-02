@@ -53,7 +53,7 @@ public class CharacterModel : MonoBehaviour
 
     #region Life Values
 
-    private float _currentLife, _maxLife = 5000f;
+    private float _currentLife, _maxLife = 100f;
     public float CurrentLife { get { return _currentLife; } set { _currentLife = value; } }
     public float MaxLife { get { return _maxLife; } }
 

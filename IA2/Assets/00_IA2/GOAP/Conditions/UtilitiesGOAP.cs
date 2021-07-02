@@ -8,7 +8,7 @@ public static class UtilitiesGOAP
     
     public static AbstractEnemy GetNearestEnemy(Vector3 position, LayerMask layerMask)
     {
-        var radius = 50;///REVISAR
+        var radius = 50;
         Collider[] enemy = Physics.OverlapSphere(position, radius);
 
         List<AbstractEnemy> enemiesList = new List<AbstractEnemy>();
@@ -19,7 +19,7 @@ public static class UtilitiesGOAP
         }
         var obtainedEnemy = enemiesList
            .OrderBy(n => (n.transform.position - position).sqrMagnitude)
-           .Where(n => !n._isDead)
+           .Where(n => !n._isDead&&n.enemyType != EnemyType.GOAP)
            .FirstOrDefault();
 
         Debug.Log(obtainedEnemy);

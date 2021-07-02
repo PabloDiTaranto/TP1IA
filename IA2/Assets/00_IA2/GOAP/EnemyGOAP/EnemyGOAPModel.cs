@@ -10,4 +10,5 @@ public class EnemyGOAPModel : MonoBehaviour
     public GameObject _bulletPrefab;
     public Transform _spawnPoint;
 
+
 }

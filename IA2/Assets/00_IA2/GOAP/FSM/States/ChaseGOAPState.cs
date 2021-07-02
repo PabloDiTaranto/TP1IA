@@ -16,6 +16,13 @@ public class ChaseGOAPState : MonoBaseState
 
     public override void UpdateLoop()
     {
+        if (_enemyGOAPController.CurrentEnemy == null)
+        {
+            _enemyGOAPController.AbortPlan();
+            _enemyGOAPController.ResetValues();
+            _enemyGOAPController.RestartPlanCoroutine();
+            return;
+        }
         _enemyGOAPController.transform.LookAt(_enemyGOAPController.CurrentEnemy.transform);
 
         if (!executeOnce)
@@ -35,6 +42,8 @@ public class ChaseGOAPState : MonoBaseState
 
     public override IState ProcessInput()
     {
+        if(_enemyGOAPController.CurrentEnemy == null) return this;
+        
         var sqrDistance = (_enemyGOAPController.CurrentEnemy.transform.position - transform.position).sqrMagnitude;
         if(sqrDistance < distanceToStealWeapon)
         {

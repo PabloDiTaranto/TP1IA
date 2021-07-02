@@ -5,7 +5,8 @@ using UnityEngine;
 public enum EnemyType
 {
     MELEE,
-    RANGE
+    RANGE,
+    GOAP
 }
 public abstract class AbstractEnemy: MonoBehaviour
 {

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FSM;
+using System;
 
-public class EnemyGOAPController : MonoBehaviour
+public class EnemyGOAPController : AbstractEnemy, IGridEntity
 {
+    public event Action<IGridEntity> OnMove;
     private float _lastReplanTime;
     private float _replanRate = .5f;
     private FiniteStateMachine _fsm;
@@ -34,12 +36,16 @@ public class EnemyGOAPController : MonoBehaviour
     public EnemyGOAPView _enemyGOAPView;
     public EnemyGOAPModel _enemyGOAPModel;
 
+    private HealState _healState;
+
     private void Awake()
     {
         _character = FindObjectOfType<CharacterController>();
         _meleeWeapon.SetActive(false);
         _distanceWeapon.SetActive(false);
         _enemyGOAPView = GetComponent<EnemyGOAPView>();
+        _healState = FindObjectOfType<HealState>();
+        _currentLife = 10;
 
     }
     void Start()
@@ -49,10 +55,31 @@ public class EnemyGOAPController : MonoBehaviour
         distanceWeapon.OnNeedsReplan += OnReplan;
         distanceAttack.OnNeedsReplan += OnReplan;
         meleeAttack.OnNeedsReplan += OnReplan;
-        StartCoroutine("Test");
+        RestartPlanCoroutine();
     }
 
-    IEnumerator Test()
+    void Update()
+    {
+        OnMove?.Invoke(this);
+        if(_currentLife<=0)
+            _healState.Healing();
+    }
+
+    public void RestartPlanCoroutine()
+    {
+        StartCoroutine("RestartPlan");
+    }
+
+    public void ResetValues()
+    {
+        _currentLife = 10;
+        _hasDistanceWeapon = false;
+        _hasMeleeWeapon = false;
+        MeleeWeapon.SetActive(false);
+        DistanceWeapon.SetActive(false);
+    }
+
+    private IEnumerator RestartPlan()
     {
         yield return new WaitForSeconds(3f);
         var watchDog = 5000;
@@ -112,7 +139,7 @@ public class EnemyGOAPController : MonoBehaviour
         return from;
     }
 
-    private void PlanAndExecute()
+    public void PlanAndExecute()
     {
         var actions = GOAPActionList();
 
@@ -127,7 +154,10 @@ public class EnemyGOAPController : MonoBehaviour
 
         //ConfigureFsm(plan);
     }
-
+    public void AbortPlan()
+    {
+        _fsm.Active = false;
+    }
     public void SetPlan(IEnumerable<GOAPAction> plan)
     {
         ConfigureFsm(plan);
@@ -170,6 +200,36 @@ public class EnemyGOAPController : MonoBehaviour
         Debug.Log("Completed Plan");
         _fsm = GoapPlanner.ConfigureFSM(plan, StartCoroutine);
         _fsm.Active = true;
+    }
+
+    public override void Damage()
+    {
+        _currentLife--;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.layer == 14)
+        {
+            Damage();
+        }
+    }
+
+    public void DestroyObj(params object[] parameters)
+    {
+        Destroy(gameObject);
+    }
+
+    private void OnDestroy()
+    {
+        SpatialGrid._instance.Remove(this);
+        EventManager.Unsubscribe("OnPlayerDead", DestroyObj);
+    }
+
+    public Vector3 Position
+    {
+        get => transform.position;
+        set => transform.position = value;
     }
 }
 
