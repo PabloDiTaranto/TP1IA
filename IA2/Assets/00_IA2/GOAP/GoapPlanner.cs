@@ -11,11 +11,11 @@ public class GoapPlanner {
 
     private int _watchdog;
 
-    private EnemyGOAPController _goapController;
+    private IGOAP _goapInterface;
 
-    public GoapPlanner(EnemyGOAPController goapController)
+    public GoapPlanner(IGOAP goapInterface)
     {
-        _goapController = goapController;
+        _goapInterface = goapInterface;
     }
 
     public void Run(GOAPState from, GOAPState to, IEnumerable<GOAPAction> actions, Func<IEnumerator, Coroutine> startCoroutine)
@@ -45,7 +45,7 @@ public class GoapPlanner {
             return;
         }
         var getGOAP = CalculateGoap(path);
-        _goapController.SetPlan(getGOAP);
+        _goapInterface.SetPlan(getGOAP);
         Debug.Log("entro");
 
     }

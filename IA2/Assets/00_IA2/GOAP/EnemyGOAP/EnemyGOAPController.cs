@@ -4,7 +4,7 @@ using UnityEngine;
 using FSM;
 using System;
 
-public class EnemyGOAPController : AbstractEnemy, IGridEntity
+public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
 {
     public event Action<IGridEntity> OnMove;
     private float _lastReplanTime;
