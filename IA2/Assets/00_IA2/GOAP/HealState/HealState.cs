@@ -35,6 +35,7 @@ public class HealState : MonoBehaviour
         _enemyGOAPView.HealAnim(true);
         yield return new WaitForSeconds(0.1f);
         _enemyGOAPView.HealAnim(false);
+        Debug.Log("ONHEALSTATE");
         _enemyGOAPController.RestartPlanCoroutine();
         _enemyGOAPController.ResetValues();
         _doOnce = false;

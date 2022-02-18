@@ -83,15 +83,22 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
     {
         yield return new WaitForSeconds(3f);
         var watchDog = 5000;
+        Debug.Log("RestartPlan");
+
         while (_currentEnemy==null&&watchDog>0)
         {
             watchDog -= 1;
             ObtainedEnemy();
         }
+
         if (_currentEnemy)
+        {
             PlanAndExecute();
+            Debug.Log("PlanAndExecute");
+        }
+            
         else
-            Debug.Log(_currentEnemy);
+            Debug.Log("FALLO TODO");
 
     }
 
@@ -99,19 +106,19 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
     {
         return new List<GOAPAction>{
                                               new GOAPAction("ChaseEnemy")
-                                                 .Effect("isEnemyNear", true)
+                                                 .Effect("isEnemyNear", "true")
                                                  .LinkedState(chaseEnemy),
 
 
                                               new GOAPAction("MeleeWeapon")
-                                                 .Pre("isEnemyNear", true)
-                                                 .Pre("wantMeleeWeapon", true)
-                                                 .Effect("hasMeleeWeapon",    true)
+                                                 .Pre("isEnemyNear", "true")
+                                                 .Pre("wantMeleeWeapon", 1)
+                                                 .Effect("hasMeleeWeapon", true)
                                                  .LinkedState(meleeWeapon),
 
                                               new GOAPAction("DistanceWeapon")
-                                                 .Pre("isEnemyNear",   true)
-                                                 .Pre("wantDistanceWeapon", true)
+                                                 .Pre("isEnemyNear",   "true")
+                                                 .Pre("wantDistanceWeapon", 1f)
                                                  .Effect("hasDistanceWeapon",    true)
                                                  .LinkedState(distanceWeapon),
 
@@ -132,8 +139,8 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
     {
         var from = new GOAPState();
         from.values["isEnemyNear"] = UtilitiesGOAP.IsEnemyNear(transform.position, _currentEnemy.transform.position);
-        from.values["wantMeleeWeapon"] = UtilitiesGOAP.IsNeededWeapon(EnemyType.MELEE, _currentEnemy);
-        from.values["wantDistanceWeapon"] = UtilitiesGOAP.IsNeededWeapon(EnemyType.RANGE, _currentEnemy);
+        from.values["wantMeleeWeapon"] = UtilitiesGOAP.IsNeededWeaponMelee(EnemyType.MELEE, _currentEnemy);
+        from.values["wantDistanceWeapon"] = UtilitiesGOAP.IsNeededWeaponRange(EnemyType.RANGE, _currentEnemy);
         from.values["hasMeleeWeapon"] = _hasMeleeWeapon;
         from.values["hasDistanceWeapon"] = _hasDistanceWeapon;
         return from;
@@ -198,7 +205,7 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
 
     private void ConfigureFsm(IEnumerable<GOAPAction> plan)
     {
-        Debug.Log("Completed Plan");
+        Debug.LogWarning("Completed Plan");
         _fsm = GoapPlanner.ConfigureFSM(plan, StartCoroutine);
         _fsm.Active = true;
     }

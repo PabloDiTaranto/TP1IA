@@ -22,28 +22,39 @@ public static class UtilitiesGOAP
            .Where(n => !n._isDead&&n.enemyType != EnemyType.GOAP)
            .FirstOrDefault();
 
-        Debug.Log(obtainedEnemy);
+        //Debug.Log(obtainedEnemy);
         return obtainedEnemy;
     }
 
-    public static bool IsNeededWeapon(EnemyType type, AbstractEnemy currentEnemy)
+    public static int IsNeededWeaponMelee(EnemyType type, AbstractEnemy currentEnemy)
     {
         if (currentEnemy!=null&&currentEnemy.enemyType == type)
         {
-            Debug.Log("true");
-            return true;
+            return 1;
         }
 
         else
         {
-            Debug.Log("false");
-            return false;
+            return 0;
+        }
+    }
+    
+    public static float IsNeededWeaponRange(EnemyType type, AbstractEnemy currentEnemy)
+    {
+        if (currentEnemy!=null && currentEnemy.enemyType == type)
+        {
+            return 1f;
+        }
+
+        else
+        {
+            return 0f;
         }
     }
 
-    public static bool IsEnemyNear(Vector3 init, Vector3 finit)
+    public static string IsEnemyNear(Vector3 init, Vector3 finit)
     {
-        return (finit - init).sqrMagnitude < 2 * 2;
+        return (finit - init).sqrMagnitude < 2 * 2 ? "true" : "false";
     }
 
 
