@@ -10,7 +10,7 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
     private float _lastReplanTime;
     private float _replanRate = .5f;
     private FiniteStateMachine _fsm;
-
+    
     public ChaseGOAPState chaseEnemy;
     public MeleeWeaponGOAP meleeWeapon;
     public DistanceWeaponGOAP distanceWeapon;
@@ -37,6 +37,8 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
     public EnemyGOAPModel _enemyGOAPModel;
 
     private HealState _healState;
+
+    private bool canBeDamage;
 
     private void Awake()
     {
@@ -83,9 +85,10 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
     {
         yield return new WaitForSeconds(3f);
         var watchDog = 5000;
+        canBeDamage = false;
         Debug.Log("RestartPlan");
 
-        while (_currentEnemy==null&&watchDog>0)
+        while (_currentEnemy == null && watchDog>0)
         {
             watchDog -= 1;
             ObtainedEnemy();
@@ -98,7 +101,7 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
         }
             
         else
-            Debug.Log("FALLO TODO");
+            Debug.LogError("FALLO TODO, PERDON KENNETH");
 
     }
 
@@ -137,15 +140,21 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
     GOAPState GetGOAPState()
     {
         var from = new GOAPState();
-        //Action<Vector3, Vector3> getEnemy = (Vector3 init, Vector3 finit) => { if ((finit - init).sqrMagnitude < 2 * 2) return "true"; return else "false"; }
-        //from.values["isEnemyNear"] = getEnemy;
+        
+        Func<string> getEnemyNear = () => (transform.position - _currentEnemy.transform.position).sqrMagnitude < 2 * 2 ? "true" : "false";
+        from.values["isEnemyNear"] = getEnemyNear;
 
+        Func<int> getWantMeleeWeapon = () => _currentEnemy != null && _currentEnemy.enemyType == EnemyType.MELEE ? 1 : 0;
+        from.values["wantMeleeWeapon"] = UtilitiesGOAP.IsNeededWeaponMelee(EnemyType.MELEE, _currentEnemy);//getWantMeleeWeapon;
+        
+        Func<float> getWantRangeWeapon = () => _currentEnemy != null && _currentEnemy.enemyType == EnemyType.RANGE ? 1.0f : 0.0f;
+        from.values["wantDistanceWeapon"] = UtilitiesGOAP.IsNeededWeaponRange(EnemyType.RANGE, _currentEnemy);//getWantRangeWeapon
+        
+        Func<bool> getHasMeleeWeapon = () => _hasMeleeWeapon;
+        from.values["hasMeleeWeapon"] = getHasMeleeWeapon;
 
-        from.values["isEnemyNear"] = UtilitiesGOAP.IsEnemyNear(transform.position, _currentEnemy.transform.position);//(Vector3 init, Vector3 finit) => { if ((finit - init).sqrMagnitude < 2 * 2) return "true"; else return "false"; }
-        from.values["wantMeleeWeapon"] = UtilitiesGOAP.IsNeededWeaponMelee(EnemyType.MELEE, _currentEnemy); //(AbstractEnemy currentEnemy) => { if (currentEnemy != null && currentEnemy.enemyType == type) return 1; else return 0; }
-        from.values["wantDistanceWeapon"] = UtilitiesGOAP.IsNeededWeaponRange(EnemyType.RANGE, _currentEnemy);//(AbstractEnemy currentEnemy) => { if(currentEnemy != null && currentEnemy.enemyType == type) return 1f;else return 0f;}
-        from.values["hasMeleeWeapon"] = _hasMeleeWeapon;
-        from.values["hasDistanceWeapon"] = _hasDistanceWeapon;
+        Func<bool> getHasDistanceWeapon = () => _hasDistanceWeapon;
+        from.values["hasDistanceWeapon"] = getHasDistanceWeapon;
         return from;
     }
 
@@ -211,6 +220,7 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
         Debug.LogWarning("Completed Plan");
         _fsm = GoapPlanner.ConfigureFSM(plan, StartCoroutine);
         _fsm.Active = true;
+        canBeDamage = true;
     }
 
     public override void Damage()
@@ -220,7 +230,7 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.layer == 14)
+        if(other.gameObject.layer == 14 && canBeDamage)
         {
             Damage();
         }
