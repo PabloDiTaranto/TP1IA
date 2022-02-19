@@ -134,13 +134,16 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
                                           };
 
     }
-
     GOAPState GetGOAPState()
     {
         var from = new GOAPState();
-        from.values["isEnemyNear"] = UtilitiesGOAP.IsEnemyNear(transform.position, _currentEnemy.transform.position);
-        from.values["wantMeleeWeapon"] = UtilitiesGOAP.IsNeededWeaponMelee(EnemyType.MELEE, _currentEnemy);
-        from.values["wantDistanceWeapon"] = UtilitiesGOAP.IsNeededWeaponRange(EnemyType.RANGE, _currentEnemy);
+        //Action<Vector3, Vector3> getEnemy = (Vector3 init, Vector3 finit) => { if ((finit - init).sqrMagnitude < 2 * 2) return "true"; return else "false"; }
+        //from.values["isEnemyNear"] = getEnemy;
+
+
+        from.values["isEnemyNear"] = UtilitiesGOAP.IsEnemyNear(transform.position, _currentEnemy.transform.position);//(Vector3 init, Vector3 finit) => { if ((finit - init).sqrMagnitude < 2 * 2) return "true"; else return "false"; }
+        from.values["wantMeleeWeapon"] = UtilitiesGOAP.IsNeededWeaponMelee(EnemyType.MELEE, _currentEnemy); //(AbstractEnemy currentEnemy) => { if (currentEnemy != null && currentEnemy.enemyType == type) return 1; else return 0; }
+        from.values["wantDistanceWeapon"] = UtilitiesGOAP.IsNeededWeaponRange(EnemyType.RANGE, _currentEnemy);//(AbstractEnemy currentEnemy) => { if(currentEnemy != null && currentEnemy.enemyType == type) return 1f;else return 0f;}
         from.values["hasMeleeWeapon"] = _hasMeleeWeapon;
         from.values["hasDistanceWeapon"] = _hasDistanceWeapon;
         return from;
