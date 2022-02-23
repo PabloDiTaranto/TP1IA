@@ -108,22 +108,30 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
     List<GOAPAction> GOAPActionList()
     {
         Action<GOAPAction, string, object> SetEffect = (action, key, value) => action.effects[key] = value;
+        Action<GOAPAction, string, object> SetPrecondition = (action, key, value) => action.preconditions[key] = value;
         
         GOAPAction chaseEnemy = new GOAPAction("ChaseEnemy");
         SetEffect(chaseEnemy, "isEnemyNear", "true");
 
         GOAPAction meleeWeapon = new GOAPAction("MeleeWeapon");
         SetEffect(meleeWeapon, "hasMeleeWeapon", true);
+        SetPrecondition(meleeWeapon, "isEnemyNear", "true");
+        SetPrecondition(meleeWeapon, "wantMeleeWeapon", 1);
 
         GOAPAction distanceWeapon = new GOAPAction("DistanceWeapon");
         SetEffect(distanceWeapon, "hasDistanceWeapon", true);
+        SetPrecondition(distanceWeapon, "isEnemyNear", "true");
+        SetPrecondition(distanceWeapon, "wantDistanceWeapon", 1f);
 
         GOAPAction distanceAttack = new GOAPAction("DistanceAttack");
         SetEffect(distanceAttack, "isPlayerAlive", false);
+        SetPrecondition(distanceAttack, "hasDistanceWeapon", true);
+        
 
         GOAPAction meleeAttack = new GOAPAction("MeleeAttack");
         SetEffect(meleeAttack, "isPlayerAlive", false);
-        
+        SetPrecondition(meleeAttack, "hasMeleeWeapon", true);
+
         return new List<GOAPAction>{
                                                  chaseEnemy
                                                  //.Effect("isEnemyNear", "true")
@@ -131,25 +139,25 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
 
 
                                                   meleeWeapon
-                                                 .Pre("isEnemyNear", "true")
-                                                 .Pre("wantMeleeWeapon", 1)
+                                                 //.Pre("isEnemyNear", "true")
+                                                 //.Pre("wantMeleeWeapon", 1)
                                                  //.Effect("hasMeleeWeapon", true)
                                                  .LinkedState(this.meleeWeapon),
 
                                                   distanceWeapon
-                                                 .Pre("isEnemyNear",   "true")
-                                                 .Pre("wantDistanceWeapon", 1f)
+                                                 //.Pre("isEnemyNear",   "true")
+                                                 //.Pre("wantDistanceWeapon", 1f)
                                                  //.Effect("hasDistanceWeapon",    true)
                                                  .LinkedState(this.distanceWeapon),
 
                                                  distanceAttack
-                                                 .Pre("hasDistanceWeapon",   true)
+                                                 //.Pre("hasDistanceWeapon",   true)
                                                  //.Effect("isPlayerAlive", false)
                                                  .LinkedState(this.distanceAttack),
 
                                                 
                                                  meleeAttack
-                                                 .Pre("hasMeleeWeapon",   true)
+                                                 //.Pre("hasMeleeWeapon",   true)
                                                  //.Effect("isPlayerAlive", false)//false
                                                  .LinkedState(this.meleeAttack)
                                           };
