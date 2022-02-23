@@ -127,7 +127,6 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
         SetEffect(distanceAttack, "isPlayerAlive", false);
         SetPrecondition(distanceAttack, "hasDistanceWeapon", true);
         
-
         GOAPAction meleeAttack = new GOAPAction("MeleeAttack");
         SetEffect(meleeAttack, "isPlayerAlive", false);
         SetPrecondition(meleeAttack, "hasMeleeWeapon", true);
