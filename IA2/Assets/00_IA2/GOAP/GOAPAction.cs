@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using FSM;
 using UnityEngine;
+using System;
 
 public class GOAPAction {
 
@@ -29,7 +30,7 @@ public class GOAPAction {
         return this;
     }
 
-    public GOAPAction Pre(string s, object value) {
+    public GOAPAction Pre(string s, Func<object> value) {
         preconditions[s] = value;
         return this;
     }
