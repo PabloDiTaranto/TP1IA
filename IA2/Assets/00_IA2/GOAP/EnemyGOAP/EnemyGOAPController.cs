@@ -101,7 +101,7 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
         }
             
         else
-            Debug.LogError("FALLO TODO, PERDON KENNETH");
+            Debug.LogError("Fail");
 
     }
 
