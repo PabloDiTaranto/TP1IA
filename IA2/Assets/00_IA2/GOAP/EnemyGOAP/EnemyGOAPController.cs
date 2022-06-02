@@ -133,31 +133,31 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
 
         return new List<GOAPAction>{
                                                   new GOAPAction("ChaseEnemy")
-                                                 .Effect("isEnemyNear", x => x = true)
+                                                 .Effect("isEnemyNear", x => x.SetValue(true))
                                                  .LinkedState(chaseEnemy),
 
 
                                                   new GOAPAction("MeleeWeapon")
-                                                 .Pre("isEnemyNear", x => (bool)x == true)
-                                                 .Pre("wantMeleeWeapon", x => (bool)x == true)
-                                                 .Effect("hasMeleeWeapon", x => x = true)
+                                                 .Pre("isEnemyNear", x => x.GetValue<float>() < (2 * 2))
+                                                 .Pre("wantMeleeWeapon", x => x.GetValue<EnemyGOAPController>().enemyType == EnemyType.MELEE&& x.GetValue<EnemyGOAPController>()!=null)
+                                                 .Effect("hasMeleeWeapon", x => x.SetValue(true))
                                                  .LinkedState(meleeWeapon),
 
                                                   new GOAPAction("DistanceWeapon")
-                                                 .Pre("isEnemyNear",   x => (bool)x == true)
-                                                 .Pre("wantDistanceWeapon", x => (bool)x == true)
-                                                 .Effect("hasDistanceWeapon",    x => x = true)
+                                                 .Pre("isEnemyNear",   x => x.GetValue<float>() < (2 * 2))
+                                                 .Pre("wantDistanceWeapon", x => (x.GetValue<EnemyGOAPController>().enemyType == EnemyType.RANGE&& x.GetValue<EnemyGOAPController>()!=null))
+                                                 .Effect("hasDistanceWeapon",    x => x.SetValue(true))
                                                  .LinkedState(distanceWeapon),
 
                                                  new GOAPAction("DistanceAttack")
-                                                 .Pre("hasDistanceWeapon",   x => (bool)x == true)
-                                                 .Effect("isPlayerAlive",  x => x = false)
+                                                 .Pre("hasDistanceWeapon",   x => x.GetValue<bool>() == true)
+                                                 .Effect("isPlayerAlive",  x => x.SetValue(_character.GetLife()==0))
                                                  .LinkedState(distanceAttack),
 
 
                                                  new GOAPAction("MeleeAttack")
-                                                 .Pre("hasMeleeWeapon",   x => (bool)x == true)
-                                                 .Effect("isPlayerAlive", x => x = false)
+                                                 .Pre("hasMeleeWeapon",   x => x.GetValue<bool>() == true)
+                                                 .Effect("isPlayerAlive", x => x.SetValue(_character.GetLife()==0))
                                                  .LinkedState(meleeAttack)
                                           };
 
@@ -166,12 +166,11 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
     GOAPState GetGOAPState()
     {
         var from = new GOAPState();
-        from.values["isPlayerAlive"] = _character.IsDead;
-        from.values["isEnemyNear"] = (transform.position - _currentEnemy.transform.position).sqrMagnitude < (2 * 2);
-        from.values["wantMeleeWeapon"] = _currentEnemy != null && _currentEnemy.enemyType == EnemyType.MELEE;
-        from.values["wantDistanceWeapon"] = _currentEnemy != null && _currentEnemy.enemyType == EnemyType.RANGE;
-        from.values["hasMeleeWeapon"] = _hasMeleeWeapon;
-        from.values["hasDistanceWeapon"] = _hasDistanceWeapon;
+        from.values["isEnemyNear"] = new Element((transform.position - _currentEnemy.transform.position).sqrMagnitude/* < (2 * 2)*/);
+        from.values["wantMeleeWeapon"] = new Element(_currentEnemy);
+        from.values["wantDistanceWeapon"] = new Element(_currentEnemy);
+        from.values["hasMeleeWeapon"] = new Element(_hasMeleeWeapon);
+        from.values["hasDistanceWeapon"] = new Element(_hasDistanceWeapon);
 
 
         return from;
@@ -201,7 +200,7 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
 
         var to = new GOAPState();
         
-        to.values["isPlayerAlive"] = _character.IsDead;
+        to.values["isPlayerAlive"] = new Element(_character.IsDead);
 
         var planner = new GoapPlanner(this);
 
@@ -242,7 +241,7 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
         var from = GetGOAPState();
 
         var to = new GOAPState();
-        to.values["isPlayerAlive"] = false;
+        to.values["isPlayerAlive"] = new Element(_character.IsDead);
 
         var planner = new GoapPlanner(this);
 

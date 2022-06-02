@@ -5,8 +5,8 @@ using System;
 
 public class GOAPAction {
 
-    public Dictionary<string, Func<object,bool>> preconditions { get; private set; }
-    public Dictionary<string, Action<object>> effects       { get; private set; }
+    public Dictionary<string, Func<Element,bool>> preconditions { get; private set; }
+    public Dictionary<string, Action<Element>> effects       { get; private set; }
     public string                   name          { get; private set; }
     public float                    cost          { get; private set; }
     public IState                   linkedState   { get; private set; }
@@ -15,8 +15,8 @@ public class GOAPAction {
     public GOAPAction(string name) {
         this.name     = name;
         cost          = 1f;
-        preconditions = new Dictionary<string, Func<object, bool>>();
-        effects       = new Dictionary<string, Action<object>>();
+        preconditions = new Dictionary<string, Func<Element, bool>>();
+        effects       = new Dictionary<string, Action<Element>>();
     }
 
     public GOAPAction Cost(float cost) {
@@ -30,12 +30,12 @@ public class GOAPAction {
         return this;
     }
 
-    public GOAPAction Pre(string s, Func<object, bool> value) {
+    public GOAPAction Pre(string s, Func<Element, bool> value) {
         preconditions[s] = value;
         return this;
     }
 
-    public GOAPAction Effect(string s, Action<object> value) {
+    public GOAPAction Effect(string s, Action<Element> value) {
         effects[s] = value;
         return this;
     }

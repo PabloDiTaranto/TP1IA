@@ -25,7 +25,6 @@ public class MeleeWeaponGOAP : MonoBaseState
             _enemyGOAPController._enemyGOAPView.ShootAnim(false);
             _enemyGOAPController._enemyGOAPView.GrabWeaponAnim(true);
 
-            //_enemyGOAPController._enemyGOAPView.OneShotSoundClip(0);
             executeOnce = true;
         }
     }

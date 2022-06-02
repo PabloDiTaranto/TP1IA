@@ -75,6 +75,11 @@ public class CharacterController : MonoBehaviour
 
     }
 
+    public float GetLife()
+    {
+        return _characterModel.CurrentLife;
+    }
+
     private void Move(float horizontal, float vertical)
     {
         Vector3 dir = new Vector3(horizontal, 0, vertical);
