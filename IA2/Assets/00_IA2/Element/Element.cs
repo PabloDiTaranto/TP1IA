@@ -11,8 +11,8 @@ public class Element
     }
     public T GetValue<T>()
     {
-        Debug.Log("original"+elem);
-        Debug.Log("cast"+(T)elem);
+        /*Debug.Log("original"+elem);
+        Debug.Log("cast"+(T)elem);*/
         return (T)elem;
     }
     public void SetValue<T>(T newElem)

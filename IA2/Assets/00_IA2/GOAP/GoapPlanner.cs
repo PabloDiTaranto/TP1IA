@@ -85,6 +85,11 @@ public class GoapPlanner {
 
         return actions.Where(action => action.preconditions.All(kv => kv.In(node.values)))
                       .Aggregate(new List<WeightedNode<GOAPState>>(), (possibleList, action) => {
+                          foreach (var item in action.effects)
+                          {
+                              Debug.Log(item);
+
+                          }
                            var newState = new GOAPState(node);
                            newState.values.UpdateWith(action.effects);
                            newState.generatingAction = action;

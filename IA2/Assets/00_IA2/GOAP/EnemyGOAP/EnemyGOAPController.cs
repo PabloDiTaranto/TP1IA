@@ -107,33 +107,9 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
 
     List<GOAPAction> GOAPActionList()
     {
-        /*Action<GOAPAction, string, object> SetEffect = (action, key, value) => action.effects[key] = value;
-        Action<GOAPAction, string, object> SetPrecondition = (action, key, value) => action.preconditions[key] = value;
-        
-        GOAPAction chaseEnemy = new GOAPAction("ChaseEnemy");
-        SetEffect(chaseEnemy, "isEnemyNear", "true");
-
-        GOAPAction meleeWeapon = new GOAPAction("MeleeWeapon");
-        SetEffect(meleeWeapon, "hasMeleeWeapon", true);
-        SetPrecondition(meleeWeapon, "isEnemyNear", "true");
-        SetPrecondition(meleeWeapon, "wantMeleeWeapon", 1);
-
-        GOAPAction distanceWeapon = new GOAPAction("DistanceWeapon");
-        SetEffect(distanceWeapon, "hasDistanceWeapon", true);
-        SetPrecondition(distanceWeapon, "isEnemyNear", "true");
-        SetPrecondition(distanceWeapon, "wantDistanceWeapon", 1f);
-
-        GOAPAction distanceAttack = new GOAPAction("DistanceAttack");
-        SetEffect(distanceAttack, "isPlayerAlive", false);
-        SetPrecondition(distanceAttack, "hasDistanceWeapon", true);
-        
-        GOAPAction meleeAttack = new GOAPAction("MeleeAttack");
-        SetEffect(meleeAttack, "isPlayerAlive", false);
-        SetPrecondition(meleeAttack, "hasMeleeWeapon", true);*/
-
         return new List<GOAPAction>{
                                                   new GOAPAction("ChaseEnemy")
-                                                 .Effect("isEnemyNear", x => x.SetValue(0.1f))
+                                                 .Effect("isEnemyNear", x => x.SetValue(0f))
                                                  .LinkedState(chaseEnemy),
 
 
@@ -171,7 +147,7 @@ public class EnemyGOAPController : AbstractEnemy, IGridEntity, IGOAP
         from.values["wantDistanceWeapon"] = new Element(_currentEnemy != null && _currentEnemy.enemyType == EnemyType.RANGE);
         from.values["hasMeleeWeapon"] = new Element(_hasMeleeWeapon);
         from.values["hasDistanceWeapon"] = new Element(_hasDistanceWeapon);
-
+        from.values["isPlayerAlive"] = new Element(_character.IsDead);
 
         return from;
         
